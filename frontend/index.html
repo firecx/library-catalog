@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <title>Библиотечный каталог</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div name="logo-case">
+                <img name="logo-image" src="images/logo.svg" alt="лого">
+            </div>
+            <div name="interactive-line">
+                <nav name="pages-navigation">
+                    <a>Главная</a>
+                    <a>Книги</a>
+                    <a>Авторы</a>
+                </nav>
+                <search name="search-field">
+                    <form name="search-form" action="/search" method="get">
+                        <input name="search-field-input" type="search" placeholder="Книги и Авторы">
+                        <button name="search-button" type="submit">
+                            <img name="search-button-img" src="images/search.svg">
+                        </button>
+                    </form>
+                </search>
+            </div>
+        </header>
+
+        <main>
+            <div name="tags-panel">
+                <button name="tag-button" type="submit">Тэг</button>
+            </div>
+            <div name="new-books-panel">
+                <h1 name="new-books-panel-label">Новинки</h1>
+                <div name="books-case">
+                    <div name="book">
+                        <img name="book-cover" src="images/book-cover.jpg" alt="обложка книги">
+                        <p name="book-name">Название книги</p>
+                        <p name="book-author">Автор книги</p>
+                    </div>
+                </div>
+            </div>
+            <div name="top-books-panel">
+                <h1 name="top-books-panel-label">Топ 100 за месяц</h1>
+                <div name="books-case">
+                    <div name="book">
+                        <img name="book-cover" src="images/book-cover.jpg" alt="обложка книги">
+                        <p name="book-name">Название книги</p>
+                        <p name="book-author">Автор книги</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div name="description-case">
+                <p>О проекте:</p>
+                <p>«Библиотечный каталог» - это цифровая платформа, объединяющая любителей чтения. Наша цель - сделать поиск литературы простым и удобным, предоставляя актуальную информацию о наличии книг, новинках и классических изданиях. Мы стремимся создать единое пространство, где каждый читатель сможет легко ориентироваться в мире литературы.</p>
+            </div>
+            <div name="communication-case">
+                <div name="social-media">
+                    <p name="social-media-text">Следите за новостями</p>
+                    <button name="social-media-buttonn">
+                        <img src="" alt="">
+                    </button>
+                    <button name="social-media-buttonn">
+                        <img src="" alt="">
+                    </button>
+                    <button name="social-media-buttonn">
+                        <img src="" alt="">
+                    </button>
+                </div>
+                <div name="support-service-case">
+                    <p name="support-service-text">Служба поддержки</p>
+                    <p>8-999-777-66-55</p>
+                    <p>email@email.ru</p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
