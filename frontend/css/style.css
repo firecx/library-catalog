@@ -1,0 +1,90 @@
+	@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+header {
+    background-color: #30D5C8;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.logo-case {
+    width: 180px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-image {
+    width: 80px;
+    height: 80px;
+    stroke: #FFFFFF;
+}
+
+.interactive-line {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-right: 20px;
+}
+
+.pages-navigation {
+    flex: 0 0 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+.search-form {
+    flex: 0 0 60%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding: 0 20px;
+}
+
+.search-field-input {
+    width: 500px;
+    height: 80px;
+    font-size: 28px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border: none;
+    outline: none;
+    text-align: center;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+}
+
+.search-button {
+    width: 80px;
+    height: 80px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: none;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
