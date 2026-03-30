@@ -9,7 +9,7 @@ html, body {
     padding: 0;
     width: 100%;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background-color: rgba(119, 221, 231, 0.05);
+    background-color: #E9EEEF;
     display: flex;
     flex-direction: column;
     align-items: center;
