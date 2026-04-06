@@ -34,7 +34,7 @@ class AuthorController {
             $this->jsonResponse(['error' => 'Name is required'], 422);
             return;
         }
-        $author = $this->authorModel->create($input['name'], $input['bio'] ?? null);
+        $author = $this->authorModel->create($input['name']?? null);
         $this->jsonResponse(['success' => true, 'data' => $author], 201);
     }
 
