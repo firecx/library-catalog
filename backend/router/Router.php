@@ -9,7 +9,6 @@ class Router {
     private string $method;
     private string $path;
     private array $pathParts;
-    private ?int $id = null;
 
     public function __construct() {
         $this->method = $_SERVER['REQUEST_METHOD'];

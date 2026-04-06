@@ -2,7 +2,7 @@
 
 namespace Models;
 
-use config\Database;
+use Config\Database;
 use PDO;
 
 class Author {

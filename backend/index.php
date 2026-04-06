@@ -12,7 +12,7 @@ spl_autoload_register(function ($class) {
 });
 
 // Инициализация роутера
-use router\Router;
+use Router\Router;
 
 $router = new Router();
 $router->dispatch();

@@ -3,8 +3,8 @@
 
 namespace Controllers;
 
-use models\Book;
-use models\Author;
+use Models\Book;
+use Models\Author;
 
 class BookController {
     private Book $bookModel;
