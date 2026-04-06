@@ -24,8 +24,10 @@ class Author {
     }
 
     public function create(string $name): bool {
-        $stmt = $this->db->prepare("INSERT INTO authors (name) VALUES (:name)");
-        return $stmt->execute(['name' => $name]);
+        $stmt = $this->db->prepare("INSERT INTO authors (name)
+                                    VALUES (:name)");
+        $stmt->execute(['name' => $name]);
+        return $stmt->fetch();
     }
 
     public function delete(int $id): bool {
