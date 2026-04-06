@@ -2,7 +2,7 @@
 
 namespace Models;
 
-use Config\Database;
+use config\Database;
 use PDO;
 
 class Book {

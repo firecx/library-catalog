@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use Models\Author;
+use models\Author;
 
 class AuthorController {
     private Author $authorModel;

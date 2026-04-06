@@ -2,8 +2,8 @@
 
 namespace Router;
 
-use Controllers\AuthorController;
-use Controllers\BookController;
+use controllers\AuthorController;
+use controllers\BookController;
 
 class Router {
     private string $method;
