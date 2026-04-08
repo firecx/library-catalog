@@ -22,5 +22,16 @@ spl_autoload_register(function ($class) {
 // Инициализация роутера
 use router\Router;
 
+// Send CORS headers for API requests. Adjust origin as needed for production.
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
+
+// Handle preflight requests quickly
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(204);
+    exit;
+}
+
 $router = new Router();
 $router->dispatch();

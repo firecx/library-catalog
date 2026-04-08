@@ -132,6 +132,10 @@ class Router {
 
     private function jsonResponse($data, int $code): void {
         http_response_code($code);
+        // Ensure CORS headers are present for API responses
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization');
         header('Content-Type: application/json');
         echo json_encode($data);
         exit;
