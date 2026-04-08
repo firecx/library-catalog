@@ -8,6 +8,14 @@ spl_autoload_register(function ($class) {
     $file = $base_dir . str_replace('\\', '/', $class) . '.php';
     if (file_exists($file)) {
         require $file;
+        return;
+    }
+    // На файловых системах с чувствительностью к регистру (Linux) наши каталоги могут быть
+    // в нижнем регистре. Попробуем альтернативный путь со строчными сегментами.
+    $alt = $base_dir . strtolower(str_replace('\\', '/', $class)) . '.php';
+    if (file_exists($alt)) {
+        require $alt;
+        return;
     }
 });
 

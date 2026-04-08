@@ -2,8 +2,8 @@
 
 namespace Router;
 
-use controllers\AuthorController;
-use controllers\BookController;
+use Controllers\AuthorController;
+use Controllers\BookController;
 
 class Router {
     private string $method;
@@ -13,7 +13,28 @@ class Router {
 
     public function __construct() {
         $this->method = $_SERVER['REQUEST_METHOD'];
-        $this->path = $_SERVER['PATH_INFO'] ?? '/';
+        // Try PATH_INFO first (when PHP receives it), otherwise derive path from REQUEST_URI.
+        $path = $_SERVER['PATH_INFO'] ?? null;
+        if ($path === null) {
+            $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+            // Remove query string
+            $path = parse_url($requestUri, PHP_URL_PATH) ?: '/';
+            // If PHP is running the front controller from a subdirectory or via index.php,
+            // remove the script name or its directory from the beginning of the path.
+            $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+            if ($scriptName && strpos($path, $scriptName) === 0) {
+                $path = substr($path, strlen($scriptName));
+            } else {
+                $scriptDir = dirname($scriptName);
+                if ($scriptDir !== '/' && $scriptDir !== '.' && strpos($path, $scriptDir) === 0) {
+                    $path = substr($path, strlen($scriptDir));
+                }
+            }
+            if ($path === '') {
+                $path = '/';
+            }
+        }
+        $this->path = $path;
         $this->pathParts = explode('/', trim($this->path, '/'));
     }
 
@@ -59,6 +80,8 @@ class Router {
                 $controller->show($id);
             } elseif ($this->method === 'DELETE') {
                 $controller->destroy($id);
+            } elseif ($this->method === 'PUT' || $this->method === 'PATCH') {
+                $controller->update($id);
             } else {
                 $this->methodNotAllowed();
             }
@@ -95,6 +118,8 @@ class Router {
                 $controller->show($id);
             } elseif ($this->method === 'DELETE') {
                 $controller->destroy($id);
+            } elseif ($this->method === 'PUT' || $this->method === 'PATCH') {
+                $controller->update($id);
             } else {
                 $this->methodNotAllowed();
             }
