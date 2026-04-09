@@ -13,8 +13,19 @@ class AuthorController {
 
     // GET /authors — список всех авторов
     public function index(): void {
+        $query = $_GET['q'] ?? $_GET['name'] ?? null;
+        $isSearch = $query !== null && trim($query) !== '';
+        if ($isSearch) {
+            $authors = $this->authorModel->search(trim($query));
+            if (empty($authors)) {
+                $this->jsonResponse(['success' => false, 'data' => []]);
+                return;
+            }
+            $this->jsonResponse(['success' => true, 'data' => $authors]);
+        }
+
         $authors = $this->authorModel->getAll();
-        $this->jsonResponse($authors);
+        $this->jsonResponse(['success' => true, 'data' => $authors]);
     }
 
     // GET /authors/{id} — один автор
@@ -34,8 +45,12 @@ class AuthorController {
             $this->jsonResponse(['error' => 'Name is required'], 422);
             return;
         }
-        $author = $this->authorModel->create($input['name']?? null);
-        $this->jsonResponse(['success' => true, 'data' => $author], 201);
+        $created = $this->authorModel->create($input['name']);
+        if (!$created) {
+            $this->jsonResponse(['error' => 'Could not create author'], 500);
+            return;
+        }
+        $this->jsonResponse(['success' => true, 'data' => $created], 201);
     }
 
     // DELETE /authors/{id} — удалить автора
@@ -46,6 +61,21 @@ class AuthorController {
             return;
         }
         $this->jsonResponse(['success' => true, 'message' => 'Author deleted']);
+    }
+
+    // PUT/PATCH /authors/{id}
+    public function update(int $id): void {
+        $input = $this->getJsonInput();
+        if (empty($input['name'])) {
+            $this->jsonResponse(['error' => 'Name is required'], 422);
+            return;
+        }
+        $updated = $this->authorModel->update($id, $input['name']);
+        if (!$updated) {
+            $this->jsonResponse(['error' => 'Author not found or not updated'], 404);
+            return;
+        }
+        $this->jsonResponse(['success' => true, 'data' => $updated]);
     }
 
     private function getJsonInput(): array {

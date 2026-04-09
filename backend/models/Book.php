@@ -22,7 +22,19 @@ class Book {
         return $stmt->fetchAll();
     }
 
-    public function getById(int $id): array {
+    public function searchByTitle(string $term): array {
+        $sql = "SELECT books.*, authors.author_name as author_name 
+                FROM books 
+                JOIN authors ON books.author_id = authors.author_id 
+                WHERE books.book_title ILIKE :q
+                ORDER BY books.book_id
+            ";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['q' => '%' . $term . '%']);
+        return $stmt->fetchAll();
+    }
+
+    public function getById(int $id): ?array {
         $sql = "SELECT books.*, authors.author_name as author_name 
                 FROM books 
                 JOIN authors ON books.author_id = authors.author_id 
@@ -34,16 +46,19 @@ class Book {
         return $book ?: null;
     }
 
-    public function create(string $title, int $authorId): bool {
-        $sql = "INSERT INTO books (book_title, author_id) 
-                VALUES (:title, :author_id)
+    public function create(string $title, int $authorId, ?string $coverUrl = null): ?array {
+        $sql = "INSERT INTO books (book_title, author_id, book_cover_url) 
+                VALUES (:title, :author_id, :cover_url)
                 RETURNING *
         ";
         $stmt = $this->db->prepare($sql);
-        return $stmt->execute([
+        $stmt->execute([
             'title' => $title,
             'author_id' => $authorId,
+            'cover_url' => $coverUrl,
         ]);
+        $row = $stmt->fetch();
+        return $row ?: null;
     }
 
     public function delete(int $id): bool {
@@ -58,6 +73,14 @@ class Book {
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['author_id' => $authorId]);
         return $stmt->fetchAll();
+    }
+
+    public function update(int $id, string $title, int $authorId, ?string $coverUrl = null): ?array {
+        $sql = "UPDATE books SET book_title = :title, author_id = :author_id, book_cover_url = :cover_url WHERE book_id = :id RETURNING *";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['id' => $id, 'title' => $title, 'author_id' => $authorId, 'cover_url' => $coverUrl]);
+        $row = $stmt->fetch();
+        return $row ?: null;
     }
 
 }

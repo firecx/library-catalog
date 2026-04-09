@@ -17,6 +17,18 @@ class BookController {
 
     // GET /books
     public function index(): void {
+        // Search by title via ?q= or ?title=
+        $query = $_GET['q'] ?? $_GET['title'] ?? null;
+        $isSearch = $query !== null && trim($query) !== '';
+        if ($isSearch) {
+            $books = $this->bookModel->searchByTitle(trim($query));
+            if (empty($books)) {
+                $this->jsonResponse(['success' => false, 'data' => []]);
+                return;
+            }
+            $this->jsonResponse(['success' => true, 'data' => $books]);
+        }
+
         $books = $this->bookModel->getAll();
         $this->jsonResponse(['success' => true, 'data' => $books]);
     }
@@ -44,12 +56,12 @@ class BookController {
             $this->jsonResponse(['error' => 'Author not found'], 404);
             return;
         }
-        $book = $this->bookModel->create(
-            $input['title'],
-            $input['author_id'],
-            $input['year'] ?? null
-        );
-        $this->jsonResponse(['success' => true, 'data' => $book], 201);
+        $created = $this->bookModel->create($input['title'], (int)$input['author_id'], $input['book_cover_url'] ?? null);
+        if (!$created) {
+            $this->jsonResponse(['error' => 'Could not create book'], 500);
+            return;
+        }
+        $this->jsonResponse(['success' => true, 'data' => $created], 201);
     }
 
     // DELETE /books/{id}
@@ -66,6 +78,26 @@ class BookController {
     public function indexByAuthor(int $authorId): void {
         $books = $this->bookModel->getByAuthor($authorId);
         $this->jsonResponse(['success' => true, 'data' => $books]);
+    }
+
+    // PUT/PATCH /books/{id}
+    public function update(int $id): void {
+        $input = $this->getJsonInput();
+        if (empty($input['title']) || empty($input['author_id'])) {
+            $this->jsonResponse(['error' => 'title and author_id are required'], 422);
+            return;
+        }
+        $author = $this->authorModel->getById((int)$input['author_id']);
+        if (!$author) {
+            $this->jsonResponse(['error' => 'Author not found'], 404);
+            return;
+        }
+        $updated = $this->bookModel->update($id, $input['title'], (int)$input['author_id'], $input['book_cover_url'] ?? null);
+        if (!$updated) {
+            $this->jsonResponse(['error' => 'Book not found or not updated'], 404);
+            return;
+        }
+        $this->jsonResponse(['success' => true, 'data' => $updated]);
     }
 
     private function getJsonInput(): array {

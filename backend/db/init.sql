@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS authors (
 CREATE TABLE IF NOT EXISTS books (
     book_id SERIAL PRIMARY KEY,
     book_title VARCHAR(200) NOT NULL,
+    book_cover_url VARCHAR(500),
     author_id INTEGER NOT NULL REFERENCES authors(author_id) ON DELETE CASCADE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
