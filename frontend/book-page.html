@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <title>Библиотечный каталог</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/book-style.css" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <img class="logo-image" src="images/logo-white.svg" alt="лого">
+            <div class="interactive-line">
+                <nav class="pages-navigation">
+                    <a href="/">Главная</a>
+                    <a>Книги</a>
+                    <a>Авторы</a>
+                </nav>
+                <form class="search-form" action="/search" method="get">
+                    <input class="search-field-input" type="search" placeholder="Книги и Авторы">
+                    <button class="search-button" type="submit">
+                        <img class="search-button-img" src="images/search-color.svg">
+                    </button>
+                </form>
+            </div>
+        </header>
+        <main>
+            <div class="book-panel">
+                <div class="book-line">
+                    <img src="/images/placeholder-book-cover.jpg">
+                    <button id="read-book-button">Читать книгу</button>
+                    <button id="download-book-button">Скачать книгу</button>
+                </div>
+                <div class="book-info">
+                    <div class="brief-info">
+                        <h1 id="book-title">Рыба</h1>
+                        <p id="author-name">Иван иванов</p>
+                        <p id="book-tags">Современная проза, детектив, драма</p>
+                        <p id="book-status">Весь текст</p>
+                        <p id="update-date">01.04.2026</p>
+                        <p id="book-series">Цикл: О рыбах и работе</p>
+                    </div>
+                    <div>
+                        <div>
+                            <button id="annotation-button">Аннотация</button>
+                            <button id="table-of-contents-button">Оглавление</button>
+                        </div>
+                        <div id="annotation-case">
+                            <p>
+                                Разнообразный и богатый опыт говорит нам, что начало повседневной работы по формированию позиции позволяет оценить значение модели развития. С другой стороны, дальнейшее развитие различных форм деятельности в значительной степени обуславливает создание системы обучения кадров, соответствующей насущным потребностям.
+                            </p>
+                            <p>
+                                Таким образом, постоянное информационно-пропагандистское обеспечение нашей деятельности играет важную роль в формировании новых предложений. Повседневная практика показывает, что укрепление и развитие внутренней структуры напрямую зависит от направлений прогрессивного развития.
+                            </p>
+                            <p>
+                                Не следует, однако, забывать, что рамки и место обучения кадров обеспечивает актуальность новых принципов формирования материально-технической и кадровой базы.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="author-panel">
+                <div class="author-card">
+                    <div class="author-info">
+                        <img src="/images/user-avatar-placeholder.svg">
+                        <p id="author-info-name">Иван Иванов</p>
+                    </div>
+                    <div class="author-statistics">
+                        <div class="author-statistics-books">
+                            <img src="/images/book-icon.svg">
+                            <p>12</p>
+                        </div>
+                        <div class="author-statistics-person">
+                            <img src="/images/person-icon.svg">
+                            <p>120</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="authors-books">
+                    <p>Книги автора</p>
+                    <div class="books-line">
+                        <div class="book-card">
+                            <img class="book-cover" src="/images/placeholder-book-cover.jpg">
+                            <div class="book-card-info">
+                                <p class="book-name">Название книги</p>
+                                <p class="book-author">Автор книги</p>
+                            </div>
+                        </div>
+                        <div class="book-card">
+                            <img class="book-cover" src="/images/placeholder-book-cover.jpg">
+                            <div class="book-card-info">
+                                <p class="book-name">Название книги</p>
+                                <p class="book-author">Автор книги</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div class="description-case">
+                <p class="description">О проекте:</p>
+                <p class="description">«Библиотечный каталог» - это цифровая платформа, объединяющая любителей чтения. Наша цель - сделать поиск литературы простым и удобным, предоставляя актуальную информацию о наличии книг, новинках и классических изданиях. Мы стремимся создать единое пространство, где каждый читатель сможет легко ориентироваться в мире литературы.</p>
+            </div>
+            <div class="communication-case">
+                <div class="social-media-case">
+                    <p class="social-media-text">Следите за новостями</p>
+                    <div class="social-media-button-case">
+                        <a class="social-media-button">
+                            <img src="images/mail-icon.svg" alt="">
+                        </a>
+                        <a class="social-media-button">
+                            <img src="images/vk-icon.svg" alt="">
+                        </a>
+                        <a class="social-media-button">
+                            <img src="images/telegram-icon.svg" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="support-service-case">
+                    <p class="support-service-line">Служба поддержки</p>
+                    <div class="support-service-text">
+                        <p>8-999-777-66-55</p>
+                        <p>email@email.ru</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
