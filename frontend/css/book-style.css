@@ -16,6 +16,7 @@ html, body {
     width: 100%;
     min-height: 100vh;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
     background-color: #E9EEEF;
     display: flex;
     flex-direction: column;
@@ -65,7 +66,7 @@ header {
     align-items: center;
     justify-content: space-evenly;
     gap: 20px;
-    font-size: 28px;
+    font-size: 2rem;
     font-weight: bold;
     color: #FFFFFF;
 }
@@ -82,7 +83,7 @@ header {
     max-width: clamp(180px, 60vw, 500px);
     width: 100%;
     height: calc(var(--header-height) - 20px);
-    font-size: var(--search-font);
+    font-size: 1.8rem;
     border-top-left-radius: 0.8rem;
     border-bottom-left-radius: 0.8rem;
     border: none;
@@ -390,7 +391,7 @@ footer {
         max-width: none; /* override global clamp */
         box-sizing: border-box;
         height: 44px;
-        font-size: 16px;
+        font-size: 1rem;
         border-radius: 8px 0 0 8px;
         text-align: left;
         min-width: 0; /* allow flex children to shrink properly */
@@ -452,7 +453,6 @@ footer {
     .pages-navigation {
         display: flex;
         gap: 20px;
-        font-size: 20px;
     }
 
     .interactive-line {
@@ -471,7 +471,6 @@ footer {
 
     .search-field-input {
         height: calc(var(--header-height) - 20px);
-        font-size: var(--search-font);
         max-width: 420px;
     }
 

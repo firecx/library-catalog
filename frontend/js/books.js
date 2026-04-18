@@ -1,6 +1,6 @@
 // Remote API base and storage base — configure here
-const API_BASE = 'http://localhost:8080';
-const STORAGE_BASE = 'https://your-storage.example.com/';
+const API_BASE = 'http://localhost:8080'; // api backend
+const STORAGE_BASE = 'https://your-storage.example.com/'; // img and books storage
 
 document.addEventListener('DOMContentLoaded', () => {
     const newPanel = document.getElementById('new-books');
