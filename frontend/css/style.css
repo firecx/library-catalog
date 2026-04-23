@@ -290,6 +290,12 @@ footer {
 .description {
     margin: 0;
     padding: 0;
+    text-align: justify;
+    text-justify: inter-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    text-align-last: left;
 }
 
 .communication-case {

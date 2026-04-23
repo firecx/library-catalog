@@ -32,6 +32,7 @@ html, body {
 
 img, video, svg { max-width: 100%; height: auto; display: block; }
 
+.interactive-line,
 header,
 footer {
     overflow: hidden;
@@ -168,6 +169,13 @@ main {
 
 .author-card {
     padding: 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 
+        -2px 0 4px rgba(0, 0, 0, 0.12),
+        2px 0 4px rgba(0, 0, 0, 0.12),
+        0 2px 4px rgba(0, 0, 0, 0.12);
 }
 
 .author-info {
@@ -191,6 +199,22 @@ main {
     flex: 0 0 50%; /* split 50% / 50% */
     box-sizing: border-box;
     text-align: center;
+}
+
+.authors-books {
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    padding: 10px 5px;
+    box-shadow: 
+        -2px 0 4px rgba(0, 0, 0, 0.12),
+        2px 0 4px rgba(0, 0, 0, 0.12),
+            0 2px 4px rgba(0, 0, 0, 0.12);
+
+    p {
+        margin: 5px 5px;
+        text-align: center;
+    }
 }
 
 .book-card {
@@ -301,15 +325,11 @@ main {
     }
 
 .author-panel {
-        flex: 0 0 20%;
-        box-sizing: border-box;
-        background-color: #FFFFFF;
-        border-radius: 10px;
-        padding: 0;
-        box-shadow: 
-            -2px 0 4px rgba(0, 0, 0, 0.12),
-            2px 0 4px rgba(0, 0, 0, 0.12),
-            0 2px 4px rgba(0, 0, 0, 0.12);
+    flex: 0 0 20%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 footer {
@@ -333,6 +353,12 @@ footer {
 .description {
     margin: 0;
     padding: 0;
+    text-align: justify;
+    text-justify: inter-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    text-align-last: left;
 }
 
 .communication-case {
@@ -463,6 +489,12 @@ footer {
         border-radius: 8px 0 0 8px;
         box-sizing: border-box;
     }
+
+    .interactive-line > * {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
 }
 
 /* Mobile: <= 425px */
@@ -503,10 +535,23 @@ footer {
 
     /* Make main span full viewport width on mobile and keep vertical spacing */
     main {
+        display: flex;
+        flex-direction: column;
         width: 100%;
         max-width: 100%;
         padding: 1.25rem 12px; /* restore top/bottom spacing equal to desktop */
         margin: 0;
+    }
+
+    .book-panel {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
     }
 
     /* Stack support service items vertically on small screens */
@@ -523,5 +568,21 @@ footer {
         box-sizing: border-box;
         padding: 0 12px;
         margin: 0;
+    }
+    /* Make author-panel full width on small screens */
+    .author-panel {
+        flex: 0 0 100%;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    /* Make book-card stack and span full width on small screens */
+    .book-card {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        box-sizing: border-box;
+        gap: 0.5rem;
+        padding: 0 12px;
+        align-items: flex-start;
     }
 }
