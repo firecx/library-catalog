@@ -248,13 +248,22 @@ main {
     padding: 0 10px;
 }
 
-.author-statistics-books,
+.author-statistics-books {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 0.25rem;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    text-align: center;
+}
+
 .author-statistics-person {
     display: flex;
     align-items: center;
     justify-content: left;
     gap: 0.25rem;
-    flex: 0 0 50%;
+    flex: 1 1 auto;
     box-sizing: border-box;
     text-align: center;
 }
