@@ -180,7 +180,8 @@ main {
 
 .author-info {
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
+    gap: 10px;
     background-color: rgba(148, 237, 230, 0.3); /* #94EDE6 @ 30% */
     padding: 10px;
 }
@@ -575,13 +576,19 @@ footer {
         width: 100%;
         box-sizing: border-box;
     }
+
+    .books-line{
+        display: flex;
+        flex-direction: row;
+    }
     /* Make book-card stack and span full width on small screens */
     .book-card {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        justify-content: center;
         width: 100%;
         box-sizing: border-box;
-        gap: 0.5rem;
+        gap: 10px;
         padding: 0 12px;
         align-items: flex-start;
     }
