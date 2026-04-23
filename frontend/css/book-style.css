@@ -12,7 +12,7 @@
 
 a {
   text-decoration: none;
-  color: inherit; /* Ссылка примет цвет окружающего текста */
+  color: inherit;
 }
 
 html, body {
@@ -32,8 +32,8 @@ html, body {
 
 img, video, svg { max-width: 100%; height: auto; display: block; }
 
-.interactive-line,
 header,
+.interactive-line,
 footer {
     overflow: hidden;
 }
@@ -84,8 +84,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: 0 1.25rem; /* убрать вертикальные отступы чтобы высота содержимого совпадала с заголовком */
-    height: auto; /* подстраивается под высоту внутреннего инпута/кнопки */
+    padding: 0 1.25rem;
+    height: auto;
     align-self: center;
 }
 
@@ -93,7 +93,7 @@ header {
     max-width: clamp(180px, 60vw, 500px);
     width: 100%;
     height: calc(var(--header-height) - 20px);
-    font-size: 1rem; /* уменьшил шрифт чтобы не вылезал из строки */
+    font-size: 1rem;
     border-top-left-radius: 0.8rem;
     border-bottom-left-radius: 0.8rem;
     border: none;
@@ -128,7 +128,44 @@ input[type="search"]::-webkit-search-cancel-button {
     object-fit: contain;
 }
 
-/* Размеры и стиль кнопок на странице книги */
+main {
+    width: min(95%, 70%);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding: 1.25rem 0;
+}
+
+.book-panel {
+    flex: 0 0 80%;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    position: relative;
+    overflow: visible;
+    box-shadow: 
+        -2px 0 4px rgba(0, 0, 0, 0.25),
+            2px 0 4px rgba(0, 0, 0, 0.25),
+            0 2px 4px rgba(0, 0, 0, 0.25);
+    padding: 20px 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.book-line {
+    flex: 0 0 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
 #read-book-button,
 #download-book-button {
     display: inline-flex;
@@ -139,11 +176,18 @@ input[type="search"]::-webkit-search-cancel-button {
     border-radius: 10px;
     box-sizing: border-box;
     text-align: center;
-    background-color: rgba(148, 237, 230, 0.3); /* #94EDE6 @ 30% */
-    border: 1px solid #94EDE6; /* solid border at 100% */
+    background-color: rgba(148, 237, 230, 0.3);
+    border: 1px solid #94EDE6;
 }
 
-/* Same visual style for annotation and table-of-contents buttons (do not change layout) */
+.book-info {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    box-sizing: border-box;
+}
+
 #annotation-button,
 #table-of-contents-button {
     display: inline-flex;
@@ -157,14 +201,27 @@ input[type="search"]::-webkit-search-cancel-button {
     background-color: rgba(148, 237, 230, 0.3);
     border: 1px solid #94EDE6;
 }
-main {
-    width: min(95%, 70%);
+
+#annotation-case {
+    text-align: justify;
+    text-indent: 25px;
+    margin: 0;
+    line-height: 1.6;
+    padding-right: 10px;
+    padding-top: 10px;
+    -webkit-text-size-adjust: 100%;
+}
+
+#annotation-case p {
+    margin: 0;
+}
+
+.author-panel {
+    flex: 0 0 20%;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
-    padding: 1.25rem 0;
-    flex: 1 0 auto;
+    gap: 10px;
 }
 
 .author-card {
@@ -182,13 +239,13 @@ main {
     display: flex;
     justify-content: left;
     gap: 10px;
-    background-color: rgba(148, 237, 230, 0.3); /* #94EDE6 @ 30% */
+    background-color: rgba(148, 237, 230, 0.3);
     padding: 10px;
 }
 
 .author-statistics {
     display: flex;
-    padding: 0 10px; /* horizontal padding */
+    padding: 0 10px;
 }
 
 .author-statistics-books,
@@ -197,7 +254,7 @@ main {
     align-items: center;
     justify-content: left;
     gap: 0.25rem;
-    flex: 0 0 50%; /* split 50% / 50% */
+    flex: 0 0 50%;
     box-sizing: border-box;
     text-align: center;
 }
@@ -212,10 +269,22 @@ main {
         2px 0 4px rgba(0, 0, 0, 0.12),
             0 2px 4px rgba(0, 0, 0, 0.12);
 
-    p {
-        margin: 5px 5px;
-        text-align: center;
-    }
+    display: inline-block;
+    vertical-align: top;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
+.authors-books p {
+    margin: 5px 5px;
+    text-align: center;
+}
+
+.books-line {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 10px;
 }
 
 .book-card {
@@ -234,103 +303,12 @@ main {
     margin: 5px;
 }
 
-/* Author's book cards: make book-cover 100px high, width auto */
 .book-cover {
     height: 100px;
     width: auto;
     max-width: 100%;
     object-fit: cover;
     display: block;
-}
-
-.books-line {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 10px;
-}
-
-main {
-    width: min(95%, 70%);
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1.25rem;
-    padding: 1.25rem 0;
-}
-
-.book-panel {
-    flex: 0 0 80%;
-    background-color: #FFFFFF; /* match .books-panel */
-    border-radius: 10px;
-    position: relative;
-    overflow: visible;
-    box-shadow: 
-        -2px 0 4px rgba(0, 0, 0, 0.25),
-            2px 0 4px rgba(0, 0, 0, 0.25),
-            0 2px 4px rgba(0, 0, 0, 0.25);
-        padding: 20px 5px;
-        box-sizing: border-box;
-    }
-
-    /* Arrange book-line and book-info side-by-side inside book-panel */
-    .book-panel {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 1rem;
-    }
-
-    .book-line {
-        flex: 0 0 180px; /* 160px buttons + 10px left + 10px right */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 0 10px;
-        box-sizing: border-box;
-    }
-
-    .book-line img {
-        height: 220px;
-        width: auto;
-        max-width: 100%;
-        border-radius: 6px;
-        object-fit: cover;
-        display: block;
-    }
-
-    .book-info {
-        flex: 1 1 auto;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        box-sizing: border-box;
-    }
-
-    /* Annotation text formatting */
-    #annotation-case {
-        text-align: justify;
-        text-indent: 25px;
-        margin: 0;
-        line-height: 1.6;
-        padding-right: 10px;
-        padding-top: 10px;
-        -webkit-text-size-adjust: 100%;
-    }
-
-    #annotation-case p {
-        margin: 0;
-    }
-
-.author-panel {
-    flex: 0 0 20%;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }
 
 footer {
@@ -399,7 +377,7 @@ footer {
     margin: 0;
 }
 
-/* Tablet: 426px - 1439px */
+/* Tablet */
 @media (max-width: 1023px) and (min-width: 426px) {
     header {
         min-height: var(--header-height);
@@ -432,20 +410,17 @@ footer {
         max-width: 420px;
     }
 
-    /* Main content width similar to desktop */
     main {
         width: 100%;
         max-width: 100%;
-        padding: 1.25rem 12px; /* same as mobile */
+        padding: 1.25rem 12px;
     }
 
-    /* Stack support service items vertically on tablets */
     .support-service-text {
         flex-direction: column;
         align-items: flex-start;
     }
 
-    /* Make footer columns span main width on tablet */
     .description-case,
     .communication-case {
         width: 100%;
@@ -458,7 +433,6 @@ footer {
 }
 
 @media (max-width: 660px) {
-    /* Stack header elements vertically for narrow screens */
     header {
         height: auto;
         padding: 8px 12px;
@@ -498,7 +472,7 @@ footer {
     }
 }
 
-/* Mobile: <= 425px */
+/* Mobile */
 @media (max-width: 426px) {
     header {
         min-height: 64px;
@@ -514,33 +488,31 @@ footer {
 
     .search-field-input {
         width: 100%;
-        max-width: none; /* override global clamp */
+        max-width: none;
         box-sizing: border-box;
         height: 44px;
         border-radius: 8px 0 0 8px;
         text-align: left;
-        min-width: 0; /* allow flex children to shrink properly */
+        min-width: 0;
     }
 
     .search-button {
-        flex: 0 0 48px; /* fixed size button */
+        flex: 0 0 48px;
         width: 48px;
         height: 44px;
         border-radius: 0 8px 8px 0;
     }
 
-    /* hide logo on small screens so header shows only search */
     .logo-image {
         display: none;
     }
 
-    /* Make main span full viewport width on mobile and keep vertical spacing */
     main {
         display: flex;
         flex-direction: column;
         width: 100%;
         max-width: 100%;
-        padding: 1.25rem 12px; /* restore top/bottom spacing equal to desktop */
+        padding: 1.25rem 12px;
         margin: 0;
     }
 
@@ -555,13 +527,11 @@ footer {
         justify-content: space-around;
     }
 
-    /* Stack support service items vertically on small screens */
     .support-service-text {
         flex-direction: column;
         align-items: flex-start;
     }
 
-    /* Make footer columns span main width on mobile */
     .description-case,
     .communication-case {
         width: 100%;
@@ -570,7 +540,7 @@ footer {
         padding: 0 12px;
         margin: 0;
     }
-    /* Make author-panel full width on small screens */
+
     .author-panel {
         flex: 0 0 100%;
         width: 100%;
@@ -581,7 +551,7 @@ footer {
         display: flex;
         flex-direction: row;
     }
-    /* Make book-card stack and span full width on small screens */
+
     .book-card {
         display: flex;
         flex-direction: column;
