@@ -329,60 +329,8 @@ footer {
     margin: 0;
 }
 
-
-/* hide on small screens */
-@media (max-width: 768px) {
-    .scroll-button { display: none; }
-}
-
-@media (max-width: 660px) {
-    /* Stack header elements vertically for narrow screens */
-    header {
-        height: auto;
-        padding: 8px 12px;
-    }
-
-    .interactive-line {
-        display: flex;
-        flex-direction: column-reverse;
-        align-items: center;
-        gap: 8px;
-        padding-right: 0;
-    }
-
-    .search-form {
-        flex: 0 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 8px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .search-field-input {
-        width: 100%;
-        max-width: none;
-        height: 44px;
-        font-size: 1rem;
-        border-radius: 8px 0 0 8px;
-        box-sizing: border-box;
-    }
-
-    /* Make interactive-line children span full width when stacked */
-    .interactive-line > * {
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-    }
-
-}
-
 /* Tablet: 426px - 1439px */
-@media (min-width: 426px) and (max-width: 1023px) {
-    /* Tablet: use desktop-like layout but allow some spacing tweaks */
-
-    /* Header: show logo + navigation + search */
+@media (max-width: 1023px) and (min-width: 426px) {
     header {
         min-height: var(--header-height);
         height: auto;
@@ -449,6 +397,54 @@ footer {
         box-sizing: border-box;
         padding: 0 12px;
         margin: 0;
+    }
+
+}
+
+/* hide on small screens */
+@media (max-width: 768px) {
+    .scroll-button { display: none; }
+}
+
+@media (max-width: 660px) {
+    /* Stack header elements vertically for narrow screens */
+    header {
+        height: auto;
+        padding: 8px 12px;
+    }
+
+    .interactive-line {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 8px;
+        padding-right: 0;
+    }
+
+    .search-form {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 8px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .search-field-input {
+        width: 100%;
+        max-width: none;
+        height: 44px;
+        font-size: 1rem;
+        border-radius: 8px 0 0 8px;
+        box-sizing: border-box;
+    }
+
+    /* Make interactive-line children span full width when stacked */
+    .interactive-line > * {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
 }
