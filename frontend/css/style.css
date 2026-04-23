@@ -243,10 +243,7 @@ main {
 .scroll-left { left: 8px; }
 .scroll-right { right: 8px; }
 
-/* hide on small screens */
-@media (max-width: 768px) {
-    .scroll-button { display: none; }
-}
+
 
 .book-cover {
     width: auto;
@@ -332,6 +329,12 @@ footer {
     margin: 0;
 }
 
+
+/* hide on small screens */
+@media (max-width: 768px) {
+    .scroll-button { display: none; }
+}
+
 @media (max-width: 660px) {
     /* Stack header elements vertically for narrow screens */
     header {
@@ -373,75 +376,6 @@ footer {
         box-sizing: border-box;
     }
 
-}
-
-/* Mobile: <= 425px */
-@media (max-width: 426px) {
-    header {
-        min-height: 64px;
-        height: auto;
-        padding: 0 12px;
-    }
-
-    .interactive-line {
-        width: 100%;
-        justify-content: center;
-        padding-right: 0;
-    }
-
-    .search-field-input {
-        width: 100%;
-        max-width: none; /* override global clamp */
-        box-sizing: border-box;
-        height: 44px;
-        border-radius: 8px 0 0 8px;
-        text-align: left;
-        min-width: 0; /* allow flex children to shrink properly */
-    }
-
-    .search-button {
-        flex: 0 0 48px; /* fixed size button */
-        width: 48px;
-        height: 44px;
-        border-radius: 0 8px 8px 0;
-    }
-
-    /* hide logo on small screens so header shows only search */
-    .logo-image {
-        display: none;
-    }
-
-    /* Make main span full viewport width on mobile and keep vertical spacing */
-    main {
-        width: 100%;
-        max-width: 100%;
-        padding: 1.25rem 12px; /* restore top/bottom spacing equal to desktop */
-        margin: 0;
-    }
-
-    /* Remove card background and shadows for books-panel on mobile */
-    .books-panel {
-        background: transparent;
-        box-shadow: none;
-        border-radius: 0;
-        padding: 0; /* reduce extra spacing if needed */
-    }
-
-    /* Stack support service items vertically on small screens */
-    .support-service-text {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    /* Make footer columns span main width on mobile */
-    .description-case,
-    .communication-case {
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-        padding: 0 12px;
-        margin: 0;
-    }
 }
 
 /* Tablet: 426px - 1439px */
@@ -518,4 +452,75 @@ footer {
     }
 
 }
+
+/* Mobile: <= 425px */
+@media (max-width: 426px) {
+    header {
+        min-height: 64px;
+        height: auto;
+        padding: 0 12px;
+    }
+
+    .interactive-line {
+        width: 100%;
+        justify-content: center;
+        padding-right: 0;
+    }
+
+    .search-field-input {
+        width: 100%;
+        max-width: none; /* override global clamp */
+        box-sizing: border-box;
+        height: 44px;
+        border-radius: 8px 0 0 8px;
+        text-align: left;
+        min-width: 0; /* allow flex children to shrink properly */
+    }
+
+    .search-button {
+        flex: 0 0 48px; /* fixed size button */
+        width: 48px;
+        height: 44px;
+        border-radius: 0 8px 8px 0;
+    }
+
+    /* hide logo on small screens so header shows only search */
+    .logo-image {
+        display: none;
+    }
+
+    /* Make main span full viewport width on mobile and keep vertical spacing */
+    main {
+        width: 100%;
+        max-width: 100%;
+        padding: 1.25rem 12px; /* restore top/bottom spacing equal to desktop */
+        margin: 0;
+    }
+
+    /* Remove card background and shadows for books-panel on mobile */
+    .books-panel {
+        background: transparent;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0; /* reduce extra spacing if needed */
+    }
+
+    /* Stack support service items vertically on small screens */
+    .support-service-text {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Make footer columns span main width on mobile */
+    .description-case,
+    .communication-case {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 0 12px;
+        margin: 0;
+    }
+}
+
+
 
