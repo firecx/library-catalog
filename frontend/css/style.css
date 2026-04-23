@@ -45,7 +45,8 @@ footer {
 header {
     background-color: #30D5C8;
     width: 100%;
-    height: var(--header-height);
+    min-height: var(--header-height);
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: left;
@@ -68,6 +69,7 @@ header {
     align-items: center;
     gap: 20px;
     padding-right: 20px;
+    margin: 10px 0px;
 }
 
 .pages-navigation {
@@ -87,7 +89,8 @@ header {
     align-items: center;
     justify-content: flex-end;
     padding: 0 1.25rem; /* убрать вертикальные отступы чтобы высота содержимого совпадала с заголовком */
-    height: 100%;
+    height: auto; /* подстраивается под высоту внутреннего инпута/кнопки */
+    align-self: center;
 }
 
 .search-field-input {
@@ -99,7 +102,7 @@ header {
     border-bottom-left-radius: 0.8rem;
     border: none;
     outline: none;
-    padding: 0 0.75rem;
+    padding: 0 5px;
     text-align: left;
     box-sizing: border-box;
     display: block;
@@ -338,15 +341,11 @@ footer {
 
     .interactive-line {
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: center;
         gap: 8px;
         padding-right: 0;
     }
-
-    /* hide wide navigation on small screens to save space */
-    .pages-navigation { display: none; }
-
 
     .search-form {
         flex: 0 0 auto;
@@ -367,12 +366,20 @@ footer {
         box-sizing: border-box;
     }
 
+    /* Make interactive-line children span full width when stacked */
+    .interactive-line > * {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
 }
 
 /* Mobile: <= 425px */
 @media (max-width: 426px) {
     header {
-        height: 64px;
+        min-height: 64px;
+        height: auto;
         padding: 0 12px;
     }
 
@@ -443,7 +450,8 @@ footer {
 
     /* Header: show logo + navigation + search */
     header {
-        height: var(--header-height);
+        min-height: var(--header-height);
+        height: auto;
         padding: 0 20px;
     }
 

@@ -8,7 +8,6 @@
     --header-height: clamp(56px, 8vh, 100px);
     --logo-size: clamp(48px, 6.5vw, 80px);
     --search-font: clamp(14px, 2.5vw, 28px);
-    --pages-navigation-font-size: clamp(18px, 2.5vw, 60px);
 }
 
 a {
@@ -72,7 +71,7 @@ header {
     align-items: center;
     justify-content: space-evenly;
     gap: 20px;
-    font-size: var(--pages-navigation-font-size);
+    font-size: 2rem;
     font-weight: bold;
     color: #FFFFFF;
 }
@@ -82,23 +81,20 @@ header {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: 0 1.25rem; /* убрать вертикальные отступы чтобы высота содержимого совпадала с заголовком */
-    height: 100%;
+    padding: 10px 1.25rem;
 }
 
 .search-field-input {
     max-width: clamp(180px, 60vw, 500px);
     width: 100%;
     height: calc(var(--header-height) - 20px);
-    font-size: 1rem; /* уменьшил шрифт чтобы не вылезал из строки */
+    font-size: 1.8rem;
     border-top-left-radius: 0.8rem;
     border-bottom-left-radius: 0.8rem;
     border: none;
     outline: none;
     padding: 0 0.75rem;
     text-align: left;
-    box-sizing: border-box;
-    display: block;
 }
 
 input[type="search"]::-webkit-search-cancel-button {
@@ -115,7 +111,6 @@ input[type="search"]::-webkit-search-cancel-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box;
 }
 
 .search-button-img {
