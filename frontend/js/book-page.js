@@ -130,6 +130,73 @@ document.addEventListener('DOMContentLoaded', () => {
                 applyAuthorData(null);
             }
 
+            // Load author's other books and render into .books-line (exclude current book)
+            const booksLineEl = document.querySelector('.authors-books .books-line');
+            const renderAuthorBooks = (items) => {
+                if (!booksLineEl) return;
+                booksLineEl.innerHTML = '';
+                const other = Array.isArray(items) ? items.filter(it => String(it.book_id) !== String(b.book_id)) : [];
+                if (other.length === 0) {
+                    const msg = document.createElement('p');
+                    msg.textContent = 'Других книг автора не найдено.';
+                    booksLineEl.appendChild(msg);
+                    return;
+                }
+                other.forEach(item => {
+                    const link = document.createElement('a');
+                    link.className = 'book-card';
+                    link.href = `book-page.html?id=${encodeURIComponent(item.book_id)}`;
+
+                    const img = document.createElement('img');
+                    img.className = 'book-cover';
+                    img.src = item.book_cover_url || 'images/placeholder-book-cover.jpg';
+                    img.alt = item.book_title || 'обложка книги';
+                    img.onerror = () => {
+                        if (!img.src.endsWith('placeholder-book-cover.jpg')) {
+                            img.src = 'images/placeholder-book-cover.jpg';
+                        }
+                    };
+
+                    const info = document.createElement('div');
+                    info.className = 'book-card-info';
+                    const nameP = document.createElement('p');
+                    nameP.className = 'book-name';
+                    nameP.innerHTML = escapeHtml(item.book_title || '');
+                    const authorP = document.createElement('p');
+                    authorP.className = 'book-author';
+                    authorP.innerHTML = escapeHtml(item.author_name || '');
+
+                    info.appendChild(nameP);
+                    info.appendChild(authorP);
+                    link.appendChild(img);
+                    link.appendChild(info);
+                    booksLineEl.appendChild(link);
+                });
+            };
+
+            if (b.author_id) {
+                const booksUrl = `${base}/authors/${encodeURIComponent(b.author_id)}/books`;
+                fetch(booksUrl)
+                    .then(res => {
+                        if (!res.ok) throw new Error('Network response not ok: ' + res.status);
+                        return res.json();
+                    })
+                    .then(js => {
+                        if (!js || !js.success || !js.data) {
+                            console.error('Author books not found or API error', js);
+                            renderAuthorBooks([]);
+                            return;
+                        }
+                        renderAuthorBooks(js.data);
+                    })
+                    .catch(err => {
+                        console.error('Failed to load author books:', err);
+                        renderAuthorBooks([]);
+                    });
+            } else {
+                renderAuthorBooks([]);
+            }
+
             // Optionally set read/download buttons if URLs provided
             const readBtn = document.getElementById('read-book-button');
             const dlBtn = document.getElementById('download-book-button');
