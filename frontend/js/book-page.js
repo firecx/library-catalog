@@ -10,6 +10,24 @@ function escapeHtml(str) {
         .replace(/'/g, '&#039;');
 }
 
+function formatDateToDDMMYYYY(raw) {
+    if (!raw) return '';
+    try {
+        let t = String(raw).trim();
+        if (/^\d{4}-\d{2}-\d{2} /.test(t)) {
+            t = t.replace(' ', 'T');
+        }
+        const d = new Date(t);
+        if (isNaN(d.getTime())) return '';
+        const dd = String(d.getDate()).padStart(2, '0');
+        const mm = String(d.getMonth() + 1).padStart(2, '0');
+        const yyyy = d.getFullYear();
+        return `${dd}.${mm}.${yyyy}`;
+    } catch (e) {
+        return '';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
@@ -43,7 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
             setText('author-name', b.author_name || '');
             setText('book-series', b.series_name ? 'Цикл: ' + b.series_name : '');
             setText('book-status', b.book_status === 'completed' ? 'Весь текст' : (b.book_status || ''));
-            setText('update-date', b.last_text_update || b.created_at || '');
+            const rawDate = b.last_text_update || b.created_at || '';
+            setText('update-date', rawDate ? formatDateToDDMMYYYY(rawDate) : '');
             setText('book-tags', Array.isArray(b.genres) ? b.genres.join(', ') : '');
 
             // Cover
