@@ -81,8 +81,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const ann = document.getElementById('annotation-case');
             if (ann) {
                 if (b.annotation) {
-                    const safe = escapeHtml(b.annotation).replace(/\r?\n/g, '<br>');
-                    ann.innerHTML = `<p>${safe}</p>`;
+                    const rawAnn = String(b.annotation);
+                    // If the annotation already contains HTML tags, render as HTML; otherwise escape.
+                    const looksLikeHtml = /<\s*\/?\s*[a-zA-Z]+[^>]*>/.test(rawAnn);
+                    if (looksLikeHtml) {
+                        ann.innerHTML = rawAnn;
+                    } else {
+                        const safe = escapeHtml(rawAnn).replace(/\r?\n/g, '<br>');
+                        ann.innerHTML = `<p>${safe}</p>`;
+                    }
                 } else {
                     ann.innerHTML = '<p>Аннотация отсутствует.</p>';
                 }
