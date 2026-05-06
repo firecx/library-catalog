@@ -63,8 +63,9 @@ header {
     height: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
-    padding-right: 20px;
+    padding-right: 30px;
     margin: 10px 0px;
 }
 
@@ -80,13 +81,14 @@ header {
 }
 
 .search-form {
-    flex: 1 1 auto;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: 0 1.25rem;
-    height: calc(var(--header-height));
+    height: max-content;
+    width: 30vw;
     align-self: center;
+    background-color: white;
+    border-radius: 10px;
 }
 
 .search-field-input {
@@ -127,10 +129,8 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .search-button-img {
     display: block;
-    width: 60%;
-    height: 60%;
-    max-width: 100%;
-    max-height: 100%;
+    width: 80%;
+    height: 80%;
     object-fit: contain;
 }
 
@@ -302,14 +302,17 @@ main {
 .books-line {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 0.5rem;
     margin-bottom: 10px;
 }
 
 .book-card {
     display: flex;
-    justify-content: space-between;
-    padding-left: 5px;
+    justify-content: left;
+    gap: 1vw;
+    width: max-content;
 }
 
 .book-card-info {
@@ -423,17 +426,15 @@ footer {
 
     .interactive-line {
         width: 100%;
-        justify-content: flex-start;
+        justify-content: space-between;
         padding-right: 20px;
     }
 
     .search-form {
-        flex: 1 1 auto;
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        padding: 0 1rem;
-        height: calc(var(--header-height));
+        height: max-content;
     }
 
     .search-field-input {
@@ -527,12 +528,11 @@ footer {
     }
 
     .search-form {
-        flex: 0 0 auto;
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 0 8px;
-        width: 100%;
+        width: max-content;
         box-sizing: border-box;
     }
 
