@@ -280,7 +280,7 @@ main {
     box-sizing: border-box;
     border-radius: 10px;
     background-color: #FFFFFF;
-    padding: 10px 5px;
+    padding: 10px;
     box-shadow: 
         -2px 0 4px rgba(0, 0, 0, 0.12),
         2px 0 4px rgba(0, 0, 0, 0.12),
@@ -303,7 +303,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: left;
     gap: 0.5rem;
     margin-bottom: 10px;
     /* Vertical scroll and fixed max-height to show at least 4 cards */
@@ -331,7 +331,7 @@ main {
 }
 
 .book-cover {
-    height: 100px;
+    height: 120px;
     width: auto;
     max-width: 100%;
     object-fit: cover;
