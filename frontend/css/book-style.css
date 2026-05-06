@@ -479,10 +479,13 @@ footer {
     .books-line {
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
-        /* Remove vertical constraints on narrower layouts */
-        overflow: visible;
-        max-height: none;
+        justify-content: flex-start;
+        gap: 0.5rem;
+        /* Horizontal scroll for overflowing cards */
+        overflow-x: auto;
+        overflow-y: hidden;
+        flex-wrap: nowrap;
+        padding-bottom: 8px;
     }
 
     .book-card {
@@ -492,6 +495,8 @@ footer {
         align-items: center;
         padding: 0 10px;
         min-height: auto;
+        flex: 0 0 auto;
+        min-width: 160px;
     }
 
     .book-cover {
@@ -651,6 +656,11 @@ footer {
     .books-line{
         display: flex;
         flex-direction: row;
+        gap: 0.5rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+        flex-wrap: nowrap;
+        padding-bottom: 8px;
     }
 
     .book-card {
@@ -663,6 +673,8 @@ footer {
         padding: 0 12px;
         align-items: center;
         min-height: auto;
+        flex: 0 0 auto;
+        min-width: 160px;
     }
 
     .book-cover {
