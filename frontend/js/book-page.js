@@ -95,6 +95,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            // Author card: load author details if author_id present and fill the author card
+            const authorInfoNameEl = document.getElementById('author-info-name');
+            const briefAuthorNameEl = document.getElementById('author-name');
+            const authorBooksCountEl = document.querySelector('.author-statistics-books p');
+            const applyAuthorData = (a) => {
+                const name = (a && a.author_name) || b.author_name || '';
+                const count = (a && (a.book_count != null)) ? String(a.book_count) : ((b.book_count != null) ? String(b.book_count) : '');
+                if (authorInfoNameEl) authorInfoNameEl.textContent = name;
+                if (briefAuthorNameEl) briefAuthorNameEl.textContent = name;
+                if (authorBooksCountEl) authorBooksCountEl.textContent = count;
+            };
+
+            if (b.author_id) {
+                const authorUrl = `${base}/authors/${encodeURIComponent(b.author_id)}`;
+                fetch(authorUrl)
+                    .then(res => {
+                        if (!res.ok) throw new Error('Network response not ok: ' + res.status);
+                        return res.json();
+                    })
+                    .then(js => {
+                        if (!js || !js.success || !js.data) {
+                            console.error('Author not found or API error', js);
+                            applyAuthorData(null);
+                            return;
+                        }
+                        applyAuthorData(js.data);
+                    })
+                    .catch(err => {
+                        console.error('Failed to load author:', err);
+                        applyAuthorData(null);
+                    });
+            } else {
+                applyAuthorData(null);
+            }
+
             // Optionally set read/download buttons if URLs provided
             const readBtn = document.getElementById('read-book-button');
             const dlBtn = document.getElementById('download-book-button');
