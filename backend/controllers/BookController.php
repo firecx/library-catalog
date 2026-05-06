@@ -56,7 +56,17 @@ class BookController {
             $this->jsonResponse(['error' => 'Author not found'], 404);
             return;
         }
-        $created = $this->bookModel->create($input['title'], (int)$input['author_id'], $input['book_cover_url'] ?? null);
+        $created = $this->bookModel->create(
+            $input['title'],
+            (int)$input['author_id'],
+            $input['book_cover_url'] ?? null,
+            $input['series_name'] ?? null,
+            $input['book_status'] ?? null,
+            $input['last_text_update'] ?? null,
+            $input['annotation'] ?? null,
+            $input['table_of_contents'] ?? null,
+            is_array($input['genres'] ?? null) ? $input['genres'] : []
+        );
         if (!$created) {
             $this->jsonResponse(['error' => 'Could not create book'], 500);
             return;
@@ -92,7 +102,18 @@ class BookController {
             $this->jsonResponse(['error' => 'Author not found'], 404);
             return;
         }
-        $updated = $this->bookModel->update($id, $input['title'], (int)$input['author_id'], $input['book_cover_url'] ?? null);
+        $updated = $this->bookModel->update(
+            $id,
+            $input['title'],
+            (int)$input['author_id'],
+            $input['book_cover_url'] ?? null,
+            $input['series_name'] ?? null,
+            $input['book_status'] ?? null,
+            $input['last_text_update'] ?? null,
+            $input['annotation'] ?? null,
+            $input['table_of_contents'] ?? null,
+            is_array($input['genres'] ?? null) ? $input['genres'] : []
+        );
         if (!$updated) {
             $this->jsonResponse(['error' => 'Book not found or not updated'], 404);
             return;

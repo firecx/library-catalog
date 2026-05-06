@@ -13,42 +13,56 @@ class Book {
     }
 
     public function getAll(): array {
-        $sql = "SELECT books.*, authors.author_name as author_name 
-                FROM books 
-                JOIN authors ON books.author_id = authors.author_id 
+        $sql = "SELECT books.*, authors.author_name as author_name,
+                        COALESCE(json_agg(DISTINCT genres.genre_name) FILTER (WHERE genres.genre_name IS NOT NULL),'[]') AS genres
+                FROM books
+                JOIN authors ON books.author_id = authors.author_id
+                LEFT JOIN books_genres ON books.book_id = books_genres.book_id
+                LEFT JOIN genres ON books_genres.genre_id = genres.genre_id
+                GROUP BY books.book_id, authors.author_name
                 ORDER BY books.book_id
             ";
         $stmt = $this->db->query($sql);
-        return $stmt->fetchAll();
+        $rows = $stmt->fetchAll();
+        return array_map([$this, 'decodeGenresInRow'], $rows);
     }
 
     public function searchByTitle(string $term): array {
-        $sql = "SELECT books.*, authors.author_name as author_name 
-                FROM books 
-                JOIN authors ON books.author_id = authors.author_id 
+        $sql = "SELECT books.*, authors.author_name as author_name,
+                        COALESCE(json_agg(DISTINCT genres.genre_name) FILTER (WHERE genres.genre_name IS NOT NULL),'[]') AS genres
+                FROM books
+                JOIN authors ON books.author_id = authors.author_id
+                LEFT JOIN books_genres ON books.book_id = books_genres.book_id
+                LEFT JOIN genres ON books_genres.genre_id = genres.genre_id
                 WHERE books.book_title ILIKE :q
+                GROUP BY books.book_id, authors.author_name
                 ORDER BY books.book_id
             ";
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['q' => '%' . $term . '%']);
-        return $stmt->fetchAll();
+        $rows = $stmt->fetchAll();
+        return array_map([$this, 'decodeGenresInRow'], $rows);
     }
 
     public function getById(int $id): ?array {
-        $sql = "SELECT books.*, authors.author_name as author_name 
-                FROM books 
-                JOIN authors ON books.author_id = authors.author_id 
+        $sql = "SELECT books.*, authors.author_name as author_name,
+                        COALESCE(json_agg(DISTINCT genres.genre_name) FILTER (WHERE genres.genre_name IS NOT NULL),'[]') AS genres
+                FROM books
+                JOIN authors ON books.author_id = authors.author_id
+                LEFT JOIN books_genres ON books.book_id = books_genres.book_id
+                LEFT JOIN genres ON books_genres.genre_id = genres.genre_id
                 WHERE books.book_id = :id
+                GROUP BY books.book_id, authors.author_name
             ";
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['id' => $id]);
         $book = $stmt->fetch();
-        return $book ?: null;
+        return $book ? $this->decodeGenresInRow($book) : null;
     }
 
-    public function create(string $title, int $authorId, ?string $coverUrl = null): ?array {
-        $sql = "INSERT INTO books (book_title, author_id, book_cover_url) 
-                VALUES (:title, :author_id, :cover_url)
+    public function create(string $title, int $authorId, ?string $coverUrl = null, ?string $seriesName = null, ?string $status = null, ?string $lastTextUpdate = null, ?string $annotation = null, ?string $tableOfContents = null, array $genres = []): ?array {
+        $sql = "INSERT INTO books (book_title, author_id, book_cover_url, series_name, book_status, last_text_update, annotation, table_of_contents)
+                VALUES (:title, :author_id, :cover_url, :series_name, :status, :last_text_update, :annotation, :table_of_contents)
                 RETURNING *
         ";
         $stmt = $this->db->prepare($sql);
@@ -56,9 +70,20 @@ class Book {
             'title' => $title,
             'author_id' => $authorId,
             'cover_url' => $coverUrl,
+            'series_name' => $seriesName,
+            'status' => $status ?? 'in_progress',
+            'last_text_update' => $lastTextUpdate,
+            'annotation' => $annotation,
+            'table_of_contents' => $tableOfContents,
         ]);
         $row = $stmt->fetch();
-        return $row ?: null;
+        if ($row && !empty($genres)) {
+            $genreIds = $this->upsertGenres($genres);
+            $this->setBookGenres((int)$row['book_id'], $genreIds);
+            // reload to include genres
+            return $this->getById((int)$row['book_id']);
+        }
+        return $row ? $this->decodeGenresInRow($row) : null;
     }
 
     public function delete(int $id): bool {
@@ -69,18 +94,77 @@ class Book {
     }
 
     public function getByAuthor(int $authorId): array {
-        $sql = "SELECT * FROM books WHERE author_id = :author_id ORDER BY book_id";
+        $sql = "SELECT books.*, authors.author_name as author_name,
+                        COALESCE(json_agg(DISTINCT genres.genre_name) FILTER (WHERE genres.genre_name IS NOT NULL),'[]') AS genres
+                FROM books
+                JOIN authors ON books.author_id = authors.author_id
+                LEFT JOIN books_genres ON books.book_id = books_genres.book_id
+                LEFT JOIN genres ON books_genres.genre_id = genres.genre_id
+                WHERE books.author_id = :author_id
+                GROUP BY books.book_id, authors.author_name
+                ORDER BY books.book_id
+            ";
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['author_id' => $authorId]);
-        return $stmt->fetchAll();
+        $rows = $stmt->fetchAll();
+        return array_map([$this, 'decodeGenresInRow'], $rows);
     }
 
-    public function update(int $id, string $title, int $authorId, ?string $coverUrl = null): ?array {
-        $sql = "UPDATE books SET book_title = :title, author_id = :author_id, book_cover_url = :cover_url WHERE book_id = :id RETURNING *";
+    public function update(int $id, string $title, int $authorId, ?string $coverUrl = null, ?string $seriesName = null, ?string $status = null, ?string $lastTextUpdate = null, ?string $annotation = null, ?string $tableOfContents = null, array $genres = []): ?array {
+        $sql = "UPDATE books SET book_title = :title, author_id = :author_id, book_cover_url = :cover_url, series_name = :series_name, book_status = :status, last_text_update = :last_text_update, annotation = :annotation, table_of_contents = :table_of_contents WHERE book_id = :id RETURNING *";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute(['id' => $id, 'title' => $title, 'author_id' => $authorId, 'cover_url' => $coverUrl]);
+        $stmt->execute(['id' => $id, 'title' => $title, 'author_id' => $authorId, 'cover_url' => $coverUrl, 'series_name' => $seriesName, 'status' => $status ?? 'in_progress', 'last_text_update' => $lastTextUpdate, 'annotation' => $annotation, 'table_of_contents' => $tableOfContents]);
         $row = $stmt->fetch();
-        return $row ?: null;
+        if ($row) {
+            if (!empty($genres)) {
+                $genreIds = $this->upsertGenres($genres);
+                $this->setBookGenres((int)$row['book_id'], $genreIds);
+            }
+            return $this->getById((int)$row['book_id']);
+        }
+        return null;
+    }
+
+    private function upsertGenres(array $genres): array {
+        $ids = [];
+        $select = $this->db->prepare('SELECT genre_id FROM genres WHERE genre_name = :name');
+        $insert = $this->db->prepare('INSERT INTO genres (genre_name) VALUES (:name) RETURNING genre_id');
+        foreach ($genres as $g) {
+            $name = trim($g);
+            if ($name === '') continue;
+            $select->execute(['name' => $name]);
+            $row = $select->fetch();
+            if ($row) {
+                $ids[] = (int)$row['genre_id'];
+                continue;
+            }
+            $insert->execute(['name' => $name]);
+            $r = $insert->fetch();
+            if ($r) $ids[] = (int)$r['genre_id'];
+        }
+        return $ids;
+    }
+
+    private function setBookGenres(int $bookId, array $genreIds): void {
+        $del = $this->db->prepare('DELETE FROM books_genres WHERE book_id = :book_id');
+        $del->execute(['book_id' => $bookId]);
+        $ins = $this->db->prepare('INSERT INTO books_genres (book_id, genre_id) VALUES (:book_id, :genre_id)');
+        foreach ($genreIds as $gid) {
+            $ins->execute(['book_id' => $bookId, 'genre_id' => $gid]);
+        }
+    }
+
+    private function decodeGenresInRow(array $row): array {
+        if (isset($row['genres'])) {
+            // genres comes as JSON text (Postgres json_agg) — ensure PHP array
+            if (is_string($row['genres'])) {
+                $decoded = json_decode($row['genres'], true);
+                $row['genres'] = $decoded === null ? [] : $decoded;
+            }
+        } else {
+            $row['genres'] = [];
+        }
+        return $row;
     }
 
 }
