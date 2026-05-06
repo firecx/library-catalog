@@ -306,7 +306,10 @@ main {
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 10px;
-    overflow: hidden;
+    /* Vertical scroll and fixed max-height to show at least 4 cards */
+    overflow-y: auto;
+    max-height: calc(4 * 120px + 3 * 0.5rem);
+    padding-right: 8px; /* space for scrollbar */
 }
 
 .book-card {
@@ -314,6 +317,7 @@ main {
     justify-content: left;
     gap: 1vw;
     width: max-content;
+    min-height: 120px; /* ensure consistent card height so 4 fit into max-height */
 }
 
 .book-card-info {
@@ -476,6 +480,9 @@ footer {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        /* Remove vertical constraints on narrower layouts */
+        overflow: visible;
+        max-height: none;
     }
 
     .book-card {
@@ -484,6 +491,7 @@ footer {
         justify-content: center;
         align-items: center;
         padding: 0 10px;
+        min-height: auto;
     }
 
     .book-cover {
@@ -654,6 +662,7 @@ footer {
         gap: 10px;
         padding: 0 12px;
         align-items: center;
+        min-height: auto;
     }
 
     .book-cover {
