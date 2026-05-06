@@ -136,7 +136,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 main {
     width: fit-content;
-    max-width: 95%;
+    max-width: 75%;
     display: inline-flex;
     flex-direction: row;
     align-items: flex-start;
@@ -306,6 +306,7 @@ main {
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 10px;
+    overflow: hidden;
 }
 
 .book-card {
