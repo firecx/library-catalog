@@ -13,20 +13,33 @@ class Author {
     }
 
     public function getAll(): array {
-        $sql = "SELECT * FROM authors ORDER BY author_id";
+        $sql = "SELECT authors.*, COUNT(books.book_id) AS book_count
+                FROM authors
+                LEFT JOIN books ON books.author_id = authors.author_id
+                GROUP BY authors.author_id
+                ORDER BY authors.author_id";
         $stmt = $this->db->query($sql);
         return $stmt->fetchAll();
     }
 
     public function search(string $term): array {
-        $sql = "SELECT * FROM authors WHERE author_name ILIKE :q ORDER BY author_id";
+        $sql = "SELECT authors.*, COUNT(books.book_id) AS book_count
+                FROM authors
+                LEFT JOIN books ON books.author_id = authors.author_id
+                WHERE authors.author_name ILIKE :q
+                GROUP BY authors.author_id
+                ORDER BY authors.author_id";
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['q' => '%' . $term . '%']);
         return $stmt->fetchAll();
     }
 
     public function getById(int $id): ?array {
-        $sql = "SELECT * FROM authors WHERE author_id = :id";
+        $sql = "SELECT authors.*, COUNT(books.book_id) AS book_count
+                FROM authors
+                LEFT JOIN books ON books.author_id = authors.author_id
+                WHERE authors.author_id = :id
+                GROUP BY authors.author_id";
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['id' => $id]);
         $row = $stmt->fetch();
