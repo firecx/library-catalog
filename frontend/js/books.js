@@ -126,6 +126,26 @@ function renderBooksInto(books, container) {
         card.appendChild(name);
         card.appendChild(author);
 
+        const bookId = book.id || book.book_id || book.book_slug || book.slug || '';
+        if (bookId) {
+            card.dataset.bookId = bookId;
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', () => {
+                const target = 'book-page.html?id=' + encodeURIComponent(bookId);
+                window.location.href = target;
+            });
+        } else {
+            // Fallback: navigate by title if no id available
+            const fallback = (book.book_title || '').trim();
+            if (fallback) {
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', () => {
+                    const slug = fallback.replace(/\s+/g, '-').toLowerCase();
+                    window.location.href = 'book-page.html?title=' + encodeURIComponent(slug);
+                });
+            }
+        }
+
         container.appendChild(card);
     });
 }
