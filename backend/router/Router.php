@@ -74,6 +74,17 @@ class Router {
                 $this->methodNotAllowed();
             }
         } else {
+            // Подресурс: /authors/{id}/books
+            if ($subresource === 'books') {
+                if ($this->method === 'GET') {
+                    $bookController = new BookController();
+                    $bookController->indexByAuthor($id);
+                } else {
+                    $this->methodNotAllowed();
+                }
+                return;
+            }
+
             // Конкретный автор
             if ($this->method === 'GET') {
                 $controller->show($id);
