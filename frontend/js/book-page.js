@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Cover
             const coverImg = document.querySelector('.book-line img') || document.querySelector('.book-panel img');
             if (coverImg) {
-                coverImg.src = b.book_cover_url || 'images/placeholder-book-cover.jpg';
+                coverImg.src = 'images/placeholder-book-cover.jpg';
                 coverImg.alt = b.book_title || 'обложка книги';
                 coverImg.onerror = () => {
                     if (!coverImg.src.endsWith('placeholder-book-cover.jpg')) {
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const img = document.createElement('img');
                     img.className = 'book-cover';
-                    img.src = item.book_cover_url || 'images/placeholder-book-cover.jpg';
+                    img.src = 'images/placeholder-book-cover.jpg';
                     img.alt = item.book_title || 'обложка книги';
                     img.onerror = () => {
                         if (!img.src.endsWith('placeholder-book-cover.jpg')) {

@@ -99,14 +99,9 @@ function renderBooksInto(books, container) {
         // If cover URL is already absolute (http/https), use it.
         // Otherwise, if a STORAGE_BASE is configured, prepend it. Fallback to local placeholder.
         const cover = book.book_cover_url ? book.book_cover_url.trim() : '';
-        if (cover.match(/^https?:\/\//i)) {
-            img.src = cover;
-        } else if (STORAGE_BASE && cover !== '') {
-            // Ensure single slash between base and path
-            img.src = STORAGE_BASE.replace(/\/$/, '') + '/' + cover.replace(/^\//, '');
-        } else {
-            img.src = 'images/placeholder-book-cover.jpg';
-        }
+        
+        img.src = 'images/placeholder-book-cover.jpg';
+
         // If remote cover fails to load, replace with placeholder (avoid infinite loop)
         img.onerror = () => {
             if (!img.src.endsWith('placeholder-book-cover.jpg')) {
