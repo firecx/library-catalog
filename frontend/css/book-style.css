@@ -135,8 +135,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 main {
-    width: fit-content;
-    max-width: 75%;
+    width: max-content;
     display: inline-flex;
     flex-direction: row;
     align-items: stretch;
@@ -146,7 +145,6 @@ main {
 }
 
 .book-panel {
-    flex: 0 0 80%;
     background-color: #FFFFFF;
     border-radius: 10px;
     position: relative;
@@ -225,7 +223,6 @@ main {
 }
 
 .author-panel {
-    flex: 0 0 20%;
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -408,7 +405,7 @@ footer {
     margin: 0;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1200px) {
     main {
         display: flex;
         flex-direction: column;
