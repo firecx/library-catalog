@@ -4,6 +4,7 @@ namespace Router;
 
 use Controllers\AuthorController;
 use Controllers\BookController;
+use Controllers\GenreController;
 
 class Router {
     private string $method;
@@ -57,6 +58,10 @@ class Router {
             case 'books':
                 $controller = new BookController();
                 $this->handleBook($controller, $id, $subresource);
+                break;
+            case 'genres':
+                $controller = new GenreController();
+                $this->handleGenre($controller, $id, $subresource);
                 break;
             default:
                 $this->jsonResponse(['error' => 'Not Found'], 404);
