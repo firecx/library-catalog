@@ -4,7 +4,7 @@ namespace Router;
 
 use Controllers\AuthorController;
 use Controllers\BookController;
-use Controllers\GenreController;
+use Controllers\GenresController;
 
 class Router {
     private string $method;
@@ -60,8 +60,8 @@ class Router {
                 $this->handleBook($controller, $id, $subresource);
                 break;
             case 'genres':
-                $controller = new GenreController();
-                $this->handleGenre($controller, $id, $subresource);
+                $controller = new GenresController();
+                $this->handleGenres($controller, $id, $subresource);
                 break;
             default:
                 $this->jsonResponse(['error' => 'Not Found'], 404);
@@ -133,6 +133,34 @@ class Router {
                 $controller->show($id);
             } elseif ($this->method === 'DELETE') {
                 $controller->destroy($id);
+            } elseif ($this->method === 'PUT' || $this->method === 'PATCH') {
+                $controller->update($id);
+            } else {
+                $this->methodNotAllowed();
+            }
+        }
+    }
+
+    public function handleGenres(GenresController $controller, ?int $id, ?string $subresource): void {
+        if ($id === null) {
+            if ($this->method === 'GET') {
+                $controller->index();
+            } else {
+                $this->methodNotAllowed();
+            }
+        } else {
+            // Подресурс: /genres/{id}/books
+            if ($subresource === 'books') {
+                if ($this->method === 'GET') {
+                    $controller->showBooksByGenre($id);
+                } else {
+                    $this->methodNotAllowed();
+                }
+                return;
+            }
+
+            if ($this->method === 'GET') {
+                $controller->show($id);
             } elseif ($this->method === 'PUT' || $this->method === 'PATCH') {
                 $controller->update($id);
             } else {

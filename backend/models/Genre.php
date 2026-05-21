@@ -5,7 +5,7 @@ namespace Models;
 use Config\Database;
 use PDO;
 
-class Genres {
+class Genre {
     private PDO $db;
 
     public function __construct() {
@@ -40,5 +40,17 @@ class Genres {
         $stmt->execute(['genreId' => $genreId]);
         $rows = $stmt->fetchAll();
         return array_map([$this, 'decodeGenresInRow'], $rows);
+    }
+
+    private function decodeGenresInRow(array $row): array {
+        if (isset($row['genres'])) {
+            if (is_string($row['genres'])) {
+                $decoded = json_decode($row['genres'], true);
+                $row['genres'] = $decoded === null ? [] : $decoded;
+            }
+        } else {
+            $row['genres'] = [];
+        }
+        return $row;
     }
 }
