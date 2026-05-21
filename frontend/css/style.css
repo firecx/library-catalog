@@ -196,12 +196,12 @@ main {
     align-items: flex-start;
     gap: 20px;
     padding: 10px 6px;
-    overflow-x: auto; /* horizontal scrolling */
+    overflow-x: auto;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory; /* snap to cards */
-    -ms-overflow-style: none; /* IE/Edge hide scrollbar */
-    scrollbar-width: none; /* Firefox hide scrollbar */
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 .book-card {
