@@ -1,526 +1,189 @@
-	@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-* {
-    box-sizing: border-box;
-}
-
-:root {
-    --header-height: clamp(56px, 8vh, 100px);
-    --logo-size: clamp(48px, 6.5vw, 80px);
-    --pages-navigation-font-size: clamp(18px, 2.5vw, 60px);
-}
-
-a {
-  text-decoration: none;
-  color: inherit; /* Ссылка примет цвет окружающего текста */
-}
-
-html, body {
+body {
     margin: 0;
     padding: 0;
-    width: 100%;
-    min-height: 100vh;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 16px;
     background-color: #E9EEEF;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.clip-overflow { overflow: hidden; }
-
-img, video, svg { max-width: 100%; height: auto; display: block; }
-
-.interactive-line,
-.books-case,
-.books-panel,
-.tags-panel,
-.book-card,
-header,
-footer {
-    overflow: hidden;
+    font-family: Inter, sans-serif;
 }
 
 header {
-    background-color: #30D5C8;
     width: 100%;
-    min-height: var(--header-height);
-    height: auto;
+    height: 40px;
+    background-color: #30D5C8;
     display: flex;
     align-items: center;
-    justify-content: left;
+    padding: 0 30px;
+    box-sizing: border-box;
 }
-
 
 .logo-image {
-    margin: 0 10px;
-    display: block;
-    width: min(var(--logo-size), calc(var(--header-height) - 20px));
-    height: calc(var(--header-height) - 20px);
-    stroke: #FFFFFF;
-    object-fit: contain;
+    width: 30px;
+    height: 30px;
 }
-
 .interactive-line {
-    width: 100%;
-    height: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    padding-right: 30px;
-    margin: 10px 0px;
+    flex-grow: 1;
+    padding: 0 30px;
+    justify-content: space-around;
 }
-
 .pages-navigation {
-    flex: 0 0 40%;
     display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    gap: 20px;
-    font-size: var(--pages-navigation-font-size);
-    font-weight: bold;
-    color: #FFFFFF;
-}
+    justify-content: space-around;
+    flex-grow: 1;
 
+    a {
+        font-size: 1.75rem;
+        color: #FFFFFF;
+        font-weight: bold;
+    }
+}
 .search-form {
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
     height: max-content;
-    width: 30vw;
-    align-self: center;
-    background-color: white;
+    width: max-content;
+    background-color: #FFFFFF;
     border-radius: 10px;
+    overflow: hidden;
+    padding: 0 5px;
 }
-
 .search-field-input {
-    max-width: clamp(180px, 60vw, 500px);
-    width: 100%;
-    height: calc(var(--header-height) - 20px);
-    font-size: 1rem; /* уменьшил шрифт чтобы не вылезал из строки */
-    border-top-left-radius: 0.8rem;
-    border-bottom-left-radius: 0.8rem;
+    width: 35vw;
+    height: 30px;
+    background-color: #FFFFFF;
     border: none;
     outline: none;
-    padding: 0 5px;
-    text-align: left;
-    box-sizing: border-box;
-    display: block;
 }
-
-input[type="search"]::-webkit-search-cancel-button {
-    display: none;
-}
-
 .search-button {
-    width: calc(var(--header-height) - 20px);
-    height: calc(var(--header-height) - 20px);
-    border-top-right-radius: 0.8rem;
-    border-bottom-right-radius: 0.8rem;
-    border: none;
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
     background-color: #FFFFFF;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
+    border: none;
 }
-
 .search-button-img {
-    display: block;
     width: 80%;
     height: 80%;
-    object-fit: contain;
+    margin: 0;
+    padding: 0;
 }
 
 main {
-    width: min(95%, 70%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.25rem;
-    padding: 1.25rem 0;
-    flex: 1 0 auto;
+    max-width: 80%;
+    height: max-content;
+    width: 80%;
+    gap: 20px;
+    padding: 20px 0;
 }
 
 .tags-panel {
-    width: 100%;
-    height: 80px;
     background-color: #FFFFFF;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    padding: 10px 10px;
-    box-shadow: 
-        -2px 0 4px rgba(0, 0, 0, 0.25), /* слева */
-        2px 0 4px rgba(0, 0, 0, 0.25),  /* справа */
-        0 2px 4px rgba(0, 0, 0, 0.25);  /* снизу */
+    width: 100%;
+    box-sizing: border-box;
 }
-
 .tag-button {
-    width: 80px;
-    height: 30px;
-    background-color: rgba(119, 221, 231, 0.3);
-    color: #000000;
-    border-radius: 10px;
-    border-color: #30D5C8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
 }
-
 .books-panel {
-    width: 100%;
     background-color: #FFFFFF;
+    width: 100%;
+    height: max-content;
+    box-sizing: border-box;
+    padding: 10px 20px;
     border-radius: 10px;
-    position: relative; /* so scroll buttons can be absolutely positioned */
-    overflow: visible; /* allow scroll buttons to remain visible outside content */
-    box-shadow: 
-        -2px 0 4px rgba(0, 0, 0, 0.25), /* слева */
-        2px 0 4px rgba(0, 0, 0, 0.25),  /* справа */
-        0 2px 4px rgba(0, 0, 0, 0.25);  /* снизу */
 }
-
 .books-panel-label {
-    margin: 0px;
-    padding: 10px;
+    font-size: 1.75rem;
+    font-weight: medium;
+    padding: 0 30px;
+    margin: 0;
+    margin-bottom: 10px;
 }
-
 .books-case {
+    height: max-content;
     width: 100%;
     display: flex;
-    align-items: flex-start;
+    overflow: hidden;
+    justify-content: left;
     gap: 20px;
-    padding: 10px 6px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
 }
 
 .book-card {
-    width: auto; /* fixed width so card size doesn't change */
-    height: 320px; /* fixed height to keep layout stable */
-    flex: 0 0 auto; /* don't grow or shrink in flex container */
-    box-sizing: border-box;
-    border-radius: 10px;
+    width: max-content;
+    height: max-content;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.625rem;
-    padding: 0.625rem;
-    overflow: hidden; /* hide any overflowing content */
-    scroll-snap-align: start;
 }
-
-/* Hide WebKit scrollbar for horizontal strip */
-.books-case::-webkit-scrollbar {
-    height: 0; /* hide horizontal scrollbar in WebKit browsers */
-}
-
-/* Scroll buttons (desktop only) */
-.scroll-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: #FFFFFF;
-    border: 0;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.scroll-left { left: 8px; }
-.scroll-right { right: 8px; }
-
-
-
 .book-cover {
-    width: auto;
-    height: 220px; /* fixed height */
-    object-fit: contain; /* preserve aspect ratio, no cropping */
-    object-position: center;
-    background-color: #f7f7f7; /* subtle background when aspect ratios differ */
-    display: block;
-    border-radius: 10px;
-    box-shadow:
-        -2px 0 4px rgba(0, 0, 0, 0.25), /* слева */
-        2px 0 4px rgba(0, 0, 0, 0.25),  /* справа */
-        0 2px 4px rgba(0, 0, 0, 0.25);  /* снизу */
+    height: 320px;
+    width: 180px;
 }
-
-.book-name {
-    padding: 0px;
-    margin: 0px;
+.book-info {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin: 10px 0;
 }
-
+.book-title {
+    margin: 0;
+    padding: 0;
+}
 .book-author {
-    padding: 0px;
-    margin: 0px;
+    margin: 0;
+    padding: 0;
 }
+
 
 footer {
-    width: 100%;
-    height: auto;
     background-color: #FFFFFF;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin-top: auto;
+    div {
+        width: 80%;
+        max-width: 80%;
+    }
 }
 
 .description-case {
-    width: 70%;
-    text-indent: 25px;
-    margin: 10px;
-    padding: 0;
 }
-
 .description {
     margin: 0;
-    padding: 0;
-    text-align: justify;
-    text-justify: inter-word;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
-    text-align-last: left;
 }
-
 .communication-case {
-    width: 70%;
     display: flex;
-    justify-content: space-around;
-    gap: 10px;
 }
-
 .social-media-case {
-    margin: 10px;
 }
-
 .social-media-text {
-    text-align: center;
+    margin: 0;
 }
-
 .social-media-button-case {
-    display: flex;
-    gap: 10px;
 }
-
+.social-media-button {
+}
 .support-service-case {
-    margin: 10px;
 }
-
-.support-service-line{
-    text-align: center;
+.support-service-line {
+    margin: 0;
 }
-
 .support-service-text {
     display: flex;
     gap: 10px;
-}
 
-.support-service-text > * {
-    margin: 0;
-}
-
-/* Tablet: 426px - 1439px */
-@media (max-width: 1023px) and (min-width: 426px) {
-    header {
-        min-height: var(--header-height);
-        height: auto;
-        padding: 0 20px;
-    }
-
-    .logo-image {
-        display: block;
-        margin-right: 10px;
-        margin-left: 0;
-    }
-
-    .interactive-line {
-        width: 100%;
-        justify-content: space-between;
-        padding-right: 20px;
-    }
-
-    .search-form {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-    }
-
-    .search-field-input {
-        height: calc(var(--header-height) - 20px);
-        max-width: 420px;
-    }
-
-    /* Main content width similar to desktop */
-    main {
-        width: 100%;
-        max-width: 100%;
-        padding: 1.25rem 12px; /* same as mobile */
-    }
-
-    /* Books panel: show background and shadow like desktop */
-    .books-panel {
-        background-color: #FFFFFF;
-        box-shadow: 
-            -2px 0 4px rgba(0, 0, 0, 0.25),
-            2px 0 4px rgba(0, 0, 0, 0.25),
-            0 2px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 10px;
-        padding: 0.5rem 0.75rem;
-    }
-
-    /* Scroll buttons visible on larger tablets */
-    .scroll-button { display: flex; }
-
-    /* Stack support service items vertically on tablets */
-    .support-service-text {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    /* Make footer columns span main width on tablet */
-    .description-case,
-    .communication-case {
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-        padding: 0 12px;
-        margin: 0;
-    }
-
-}
-
-/* hide on small screens */
-@media (max-width: 768px) {
-    .scroll-button { display: none; }
-}
-
-@media (max-width: 660px) {
-    /* Stack header elements vertically for narrow screens */
-    header {
-        height: auto;
-        padding: 8px 12px;
-    }
-
-    .interactive-line {
-        display: flex;
-        flex-direction: column-reverse;
-        align-items: center;
-        gap: 8px;
-        padding-right: 0;
-    }
-
-    .search-form {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .search-field-input {
-        width: 100%;
-        max-width: none;
-        height: 44px;
-        font-size: 1rem;
-        border-radius: 8px 0 0 8px;
-        box-sizing: border-box;
-    }
-
-    /* Make interactive-line children span full width when stacked */
-    .interactive-line > * {
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-    }
-
-}
-
-/* Mobile: <= 425px */
-@media (max-width: 426px) {
-    header {
-        min-height: 64px;
-        height: auto;
-        padding: 0 12px;
-    }
-
-    .interactive-line {
-        width: 100%;
-        justify-content: center;
-        padding-right: 0;
-    }
-
-    .search-field-input {
-        width: 100%;
-        max-width: none; /* override global clamp */
-        box-sizing: border-box;
-        height: 44px;
-        border-radius: 8px 0 0 8px;
-        text-align: left;
-        min-width: 0; /* allow flex children to shrink properly */
-    }
-
-    .search-button {
-        flex: 0 0 48px; /* fixed size button */
-        width: 48px;
-        height: 44px;
-        border-radius: 0 8px 8px 0;
-    }
-
-    /* hide logo on small screens so header shows only search */
-    .logo-image {
-        display: none;
-    }
-
-    /* Make main span full viewport width on mobile and keep vertical spacing */
-    main {
-        width: 100%;
-        max-width: 100%;
-        padding: 1.25rem 12px; /* restore top/bottom spacing equal to desktop */
-        margin: 0;
-    }
-
-    /* Remove card background and shadows for books-panel on mobile */
-    .books-panel {
-        background: transparent;
-        box-shadow: none;
-        border-radius: 0;
-        padding: 0; /* reduce extra spacing if needed */
-    }
-
-    /* Stack support service items vertically on small screens */
-    .support-service-text {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    /* Make footer columns span main width on mobile */
-    .description-case,
-    .communication-case {
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-        padding: 0 12px;
+    p {
         margin: 0;
     }
 }
-
-
-
