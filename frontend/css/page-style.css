@@ -77,102 +77,42 @@ header {
     padding: 0;
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 80%;
-    height: max-content;
-    width: 80%;
-    gap: 20px;
-    padding: 20px 0;
+.book-panel {
 }
-
-.tags-panel {
-    background-color: #FFFFFF;
-    width: 100%;
-    border-radius: 10px;
-    height: max-content;
-    box-sizing: border-box;
-    padding: 10px 20px;
-}
-
-.tags-panel-case {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-}
-
-.tag-button {
-    min-width: 80px;
-    min-height: 30px;
-    background-color: #94EDE6;
-    border-radius: 10px;
-    border: none;
-}
-.books-panel {
-    background-color: #FFFFFF;
-    width: 100%;
-    height: max-content;
-    box-sizing: border-box;
-    padding: 10px 20px;
-    border-radius: 10px;
-}
-
-.books-panel-label {
-    font-size: 1.75rem;
-    font-weight: medium;
-    padding: 0 30px;
-    margin: 0;
-    margin-bottom: 10px;
-}
-.books-case {
-    height: max-content;
-    width: 100%;
-    display: flex;
-    overflow: hidden;
-    justify-content: left;
-    gap: 20px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-}
-
-.book-card {
-    width: max-content;
-    height: max-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.book-cover {
-    height: 320px;
-    width: 180px;
+.book-line {
 }
 .book-info {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    margin: 10px 0;
 }
-.book-title {
-    margin: 0;
-    padding: 0;
+.brief-info {
+}
+.buttons {
+}
+.author-panel {
+}
+.author-card {
+}
+.author-info {
+}
+.author-statistics {
+}
+.author-statistics-books {
+}
+.author-statistics-person {
+}
+.authors-books {
+}
+.books-line {
+}
+.book-card {
+}
+.book-cover {
+}
+.book-card-info {
+}
+.book-name {
 }
 .book-author {
-    margin: 0;
-    padding: 0;
 }
-
 
 footer {
     background-color: #FFFFFF;
@@ -286,30 +226,6 @@ footer {
         width: 90%;
         max-width: 90%;
     }
-
-    main {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .tags-panel {
-        width: 95%;
-        padding: 10px;
-    }
-
-    .books-panel {
-        background-color: transparent;
-        padding: 10px;
-    }
-
-    .book-card {
-        background-color: #FFFFFF;
-    }
-
-    .book-cover {
-        height: 240px;
-        width: 135px;
-    }
     
     footer {
         div {
@@ -333,14 +249,6 @@ footer {
     .interactive-line {
         width: 100%;
         max-width: 100%;
-    }
-
-    .tags-panel {
-        gap: 10px;
-    }
-
-    .books-panel-label {
-        padding: 0 10px;
     }
 
     footer {
