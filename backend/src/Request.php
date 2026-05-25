@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 class Request {
     public function getJsonBody(): array {
         $json = file_get_contents('php://input');

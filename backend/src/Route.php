@@ -1,5 +1,9 @@
 <?php
 
+namespace App;
+
+use Attribute;
+
 #[Attribute(Attribute::TARGET_METHOD | Attribute::TARGET_CLASS)]
 class Route {
     public function __construct(

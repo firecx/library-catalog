@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 class JsonResponse {
     public function __construct(
         private array $data,

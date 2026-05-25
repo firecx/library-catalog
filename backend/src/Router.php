@@ -1,6 +1,8 @@
 <?php
 
-require_once 'Route.php';
+namespace App;
+
+use ReflectionClass;
 
 class Router {
     private array $routes = [];
@@ -30,7 +32,7 @@ class Router {
     }
 
     public function dispatch(Request $request): void {
-        $uri = parse_url($_SERVER['REQUEST_METHOD']);
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $method = $_SERVER['REQUEST_METHOD'];
 
         if ($method === 'OPTIONS') {

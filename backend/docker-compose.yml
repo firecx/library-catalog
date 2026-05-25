@@ -6,9 +6,6 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: php-backend
-    working_dir: /var/www/html
-    volumes:
-      - .:/var/www/html
     depends_on:
       - postgres
     networks:
@@ -26,7 +23,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - .:/var/www/html
+      - ./:/app
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - php
