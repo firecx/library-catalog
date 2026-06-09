@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -21,7 +25,7 @@ header {
     display: flex;
     align-items: center;
     padding: 0 30px;
-    box-sizing: border-box;
+    
 }
 
 .logo-image {
@@ -92,7 +96,6 @@ main {
     display: flex;
     flex-grow: 1;
     gap: 10px;
-    box-sizing: border-box;
     padding: 10px;
 }
 .book-line {
@@ -118,21 +121,35 @@ main {
 .brief-info {
 }
 .buttons {
+    width: max-content;
+    gap: 10px;
+
     button {
         width: 160px;
         height: 30px;
     }
 }
+
+#annotation-table-case {
+    padding: 15px 5px;
+    text-align: justify;
+    border: 1px solid black;
+    text-indent: 1.5rem;
+}
+
 .author-panel {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    min-width: max-content;
 }
 .author-card {
 }
+
 .author-info {
     display: flex;
     align-items: center;
+    padding: 10px;
     gap: 10px;
     background-color: #D7FFFC;
 
@@ -144,6 +161,7 @@ main {
     display: flex;
     justify-content: space-around;
     background-color: #FFFFFF;
+    padding: 5px;
 }
 .author-statistics-books {
     display: flex;
@@ -171,12 +189,20 @@ main {
 }
 .authors-books {
     background-color: #FFFFFF;
+    padding: 5px;
 
     p {
         margin: 0;
+        text-align: center;
     }
 }
 .books-line {
+    padding: 5px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 650px;
 }
 .book-card {
     display: flex;
@@ -186,7 +212,14 @@ main {
     height: 100px;
 }
 .book-card-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 5px;
+    gap: 10px;
 }
+
 .book-name {
 }
 .book-author {
@@ -205,7 +238,7 @@ footer {
 }
 
 .description-case {
-    box-sizing: border-box;
+    
     padding: 10px 0;
 }
 .description {
@@ -215,7 +248,7 @@ footer {
     display: flex;
 }
 .social-media-case {
-    box-sizing: border-box;
+    
     padding: 10px 0;
     display: flex;
     flex-direction: column;
@@ -223,7 +256,7 @@ footer {
 }
 .social-media-text {
     margin: 0;
-    box-sizing: border-box;
+    
     padding-bottom: 5px;
 }
 .social-media-button-case {
@@ -235,7 +268,7 @@ footer {
 .social-media-button {
 }
 .support-service-case {
-    box-sizing: border-box;
+    
     padding: 10px 0;
     display: flex;
     flex-direction: column;
@@ -270,7 +303,7 @@ footer {
     .interactive-line {
         flex-direction: column;
         padding: 0 5px;
-        box-sizing: border-box;
+        
         width: 80%;
         max-width: 80%;
     }
@@ -282,7 +315,7 @@ footer {
 
     .search-form {
         width: 100%;
-        box-sizing: border-box;
+        
     }
 
     .search-field-input {
@@ -330,7 +363,7 @@ footer {
     }
 
     footer {
-        box-sizing: border-box;
+        
         padding: 0 10px;
 
         div {
