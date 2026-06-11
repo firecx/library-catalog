@@ -72,3 +72,5 @@ volumes:
 networks:
   network-library-catalog:
     driver: bridge
+  proxy-network:
+    external: true
