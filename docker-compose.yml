@@ -29,7 +29,7 @@ services:
 
   nginx:
     image: nginx:1.29
-    container_name: nginx-server
+    container_name: nginx-server-library-catalog
     ports:
       - "8080:80"
     volumes:
