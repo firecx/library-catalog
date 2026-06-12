@@ -31,6 +31,38 @@ class BookController {
         }
     }
 
+    /**
+     * Получение книг частями
+     * Параметры запроса:
+     * - offset (int) - сколько пропустить
+     * - limit (int) - количество книг (по умолчанию 10)
+     */
+    #[Route('/range', methods: ['GET'])]
+    public function getBooksPaginated(Request $request): JsonResponse {
+        
+        try {
+            $offset = (int)$request->query->get('offset', 0);
+            $limit = (int)$request->query->get('limit', 10);
+            
+            // Валидация параметров
+            if ($offset < 0) {
+                return JsonResponse::error("Параметр offset должен быть больше или равен 0", 400);
+            }
+            
+            if ($limit < 1 || $limit > 100) {
+                return JsonResponse::error("Параметр limit должен быть от 1 до 100", 400);
+            }
+            
+            $books = $this->bookService->getBooksPaginated($offset, $limit);
+
+            return JsonResponse::success($books);
+        } catch (PDOException $e) {
+            return JsonResponse::error("Ошибка выполнения запроса: " . $e->getMessage());
+        } catch (\Exception $e) {
+            return JsonResponse::error($e->getMessage(), 500);
+        }
+    }
+
     #[Route('/id/{id}', methods: ['GET'])]
     public function getBook(Request $request, int|string $id): JsonResponse {
         if (!is_numeric($id)) {
