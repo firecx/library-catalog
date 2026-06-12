@@ -32,6 +32,7 @@ header {
     width: 30px;
     height: 30px;
 }
+
 .interactive-line {
     display: flex;
     align-items: center;
@@ -39,6 +40,7 @@ header {
     padding: 0 30px;
     justify-content: space-around;
 }
+
 .pages-navigation {
     display: flex;
     justify-content: space-around;
@@ -50,6 +52,7 @@ header {
         font-weight: bold;
     }
 }
+
 .search-form {
     display: flex;
     height: max-content;
@@ -59,6 +62,7 @@ header {
     overflow: hidden;
     padding: 0 5px;
 }
+
 .search-field-input {
     width: 35vw;
     height: 30px;
@@ -66,6 +70,7 @@ header {
     border: none;
     outline: none;
 }
+
 .search-button {
     width: 30px;
     height: 30px;
@@ -74,6 +79,7 @@ header {
     background-color: #FFFFFF;
     border: none;
 }
+
 .search-button-img {
     width: 80%;
     height: 80%;
@@ -97,8 +103,26 @@ main {
     flex-grow: 1;
     gap: 10px;
     padding: 10px;
+    flex-direction: column;
 }
+
 .book-line {
+    display: flex;
+    gap: 10px;
+}
+
+.book-cover-main {
+    width: 160px;
+    height: auto;
+}
+
+.book-info {
+    flex-grow: 1;
+    display: flex;
+    gap: 10px;
+}
+
+.book-buttons {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -110,15 +134,6 @@ main {
         border-radius: 10px;
         background-color: #D7FFFC;
     }
-}
-.book-cover-main {
-    width: 160px;
-    height: 220px;
-}
-.book-info {
-    flex-grow: 1;
-}
-.brief-info {
 }
 
 #book-title {
@@ -148,8 +163,6 @@ main {
     gap: 10px;
     min-width: max-content;
 }
-.author-card {
-}
 
 .author-info {
     display: flex;
@@ -162,12 +175,14 @@ main {
         margin: 0;
     }
 }
+
 .author-statistics {
     display: flex;
     justify-content: space-around;
     background-color: #FFFFFF;
     padding: 5px;
 }
+
 .author-statistics-books {
     display: flex;
 
@@ -180,6 +195,7 @@ main {
         margin: 0;
     }
 }
+
 .author-statistics-person {
     display: flex;
 
@@ -192,6 +208,7 @@ main {
         margin: 0;
     }
 }
+
 .authors-books {
     background-color: #FFFFFF;
     padding: 5px;
@@ -201,6 +218,7 @@ main {
         text-align: center;
     }
 }
+
 .books-line {
     padding: 5px;
     gap: 10px;
@@ -209,13 +227,16 @@ main {
     overflow-y: auto;
     max-height: 650px;
 }
+
 .book-card {
     display: flex;
 }
+
 .book-cover {
     width: 75px;
     height: 100px;
 }
+
 .book-card-info {
     display: flex;
     flex-direction: column;
@@ -223,11 +244,12 @@ main {
     justify-content: center;
     padding-left: 5px;
     gap: 10px;
+    flex-grow: 1;
 }
 
 .book-name {
-}
-.book-author {
+    font-weight: bold;
+    max-width: 250px;
 }
 
 footer {
@@ -246,12 +268,15 @@ footer {
     
     padding: 10px 0;
 }
+
 .description {
     margin: 0;
 }
+
 .communication-case {
     display: flex;
 }
+
 .social-media-case {
     
     padding: 10px 0;
@@ -259,19 +284,20 @@ footer {
     flex-direction: column;
     align-items: center;
 }
+
 .social-media-text {
     margin: 0;
     
     padding-bottom: 5px;
 }
+
 .social-media-button-case {
     display: flex;
     width: 100%;
     justify-content: center;
     gap: 20px;
 }
-.social-media-button {
-}
+
 .support-service-case {
     
     padding: 10px 0;
@@ -280,10 +306,12 @@ footer {
     align-items: center;
     justify-content: center;
 }
+
 .support-service-line {
     width: max-content;
     margin: 0;
 }
+
 .support-service-text {
     display: flex;
     gap: 10px;
@@ -294,6 +322,13 @@ footer {
     }
 }
 
+@media (max-width: 1150px) {
+    main {
+        max-width: 90%;
+        width: 90%;
+    }
+}
+
 @media (max-width: 1000px) {
     main {
         max-width: 100%;
@@ -301,7 +336,7 @@ footer {
     }
 }
 
-@media (max-width: 820px) {
+@media (max-width: 910px) {
     header{
         height: 80px;
         padding: 0;
@@ -381,10 +416,6 @@ footer {
             font-size: 0.875rem;
         }
     }
-    
-    .book-name {
-        font-weight: bold;
-    }
 
     .support-service-text {
         flex-direction: column;
@@ -393,6 +424,17 @@ footer {
         margin: 5px 0;
     }
 
+}
+
+@media (max-width: 550px) {
+    .book-info {
+        flex-direction: column;
+    }
+
+    .book-buttons {
+        flex-direction: row;
+        justify-content: space-around;
+    }
 }
 
 @media (max-width: 490px) {
@@ -420,10 +462,32 @@ footer {
 
 }
 
-@media (max-width: 375px) {
+@media (max-width: 440px) {
+    #book-title {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 390px) {
     .interactive-line {
         width: 100%;
         max-width: 100%;
+    }
+
+    main {
+        padding: 0;
+    }
+
+    #book-title {
+        font-size: 1.125rem;
+    }
+
+    #author-name {
+        font-size: 0.875rem;
+    }
+
+    #book-tags {
+        font-size: 0.875rem;
     }
 
     footer {
