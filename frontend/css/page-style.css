@@ -120,6 +120,11 @@ main {
 }
 .brief-info {
 }
+
+#book-title {
+    margin: 10px 0;
+}
+
 .buttons {
     width: max-content;
     gap: 10px;
@@ -289,6 +294,13 @@ footer {
     }
 }
 
+@media (max-width: 1000px) {
+    main {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
 @media (max-width: 820px) {
     header{
         height: 80px;
@@ -321,7 +333,59 @@ footer {
     .search-field-input {
         flex-grow: 1;
     }
+
+    main {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 10px;
+    }
+
+    .author-panel {
+        max-width: 100%;
+        width: 100%;
+        min-width: auto;
+    }
+
+    .author-card {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .authors-books {
+        flex-direction: row;
+        max-width: 100%;
+    }
+
+    .books-line {
+        flex-direction: row;
+        overflow-x: auto;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .book-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-cover {
+        height: 200px;
+        width: auto;
+    }
+
+    .book-card-info {
+        padding: 0;
+        gap: 5px;
+
+        p {
+            font-size: 0.875rem;
+        }
+    }
     
+    .book-name {
+        font-weight: bold;
+    }
+
     .support-service-text {
         flex-direction: column;
         align-items: center;
